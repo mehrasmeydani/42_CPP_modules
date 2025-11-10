@@ -1,4 +1,5 @@
 #pragma once
+
 #include <string>
 
 class Zombie
@@ -14,5 +15,4 @@ class Zombie
 		~Zombie();
 };
 
-Zombie*	newZombie(std::string name);
-void 	randomChump(std::string name);
+Zombie*	zombieHorde(int N, std::string name);

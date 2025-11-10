@@ -1,8 +1,6 @@
 #include "../header/Zombie.hpp"
 #include <iostream>
-#include <ostream>
 #include <new>
-#include <string>
 
 Zombie::Zombie()
 {

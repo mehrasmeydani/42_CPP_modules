@@ -8,6 +8,7 @@ int main()
 	heap_zombie = newZombie("Alan");
 	if (!heap_zombie)
 		return (0);
+	randomChump("chump");
 	stack_zombie.set_name("Alien");
 	heap_zombie->announce();
 	stack_zombie.announce();

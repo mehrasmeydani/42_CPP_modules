@@ -10,11 +10,11 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC			= Zombie.cpp main.cpp
+SRC			= Zombie.cpp zombieHorde.cpp main.cpp
 SRCS		= ${addprefix ${PRE_SRC}, ${SRC}}
 PRE_SRC		= srcs/
 HEAD		= header/
-NAME		= BraiiiiiiinnnzzzZ
+NAME		= Moar_brainz!
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
 OBJ			= ${SRC:.cpp=.o}
 PRE_OBJ		= obj/
