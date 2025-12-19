@@ -6,15 +6,15 @@
 #    By: mehras <mehras@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 14:44:18 by codespace         #+#    #+#              #
-#    Updated: 2025/12/19 05:13:59 by mehras           ###   ########.fr        #
+#    Updated: 2025/12/19 05:13:38 by mehras           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC			= megaphone.cpp
+SRC			= tests.cpp Account.cpp
 SRCS		= ${addprefix ${PRE_SRC}, ${SRC}}
 PRE_SRC		= srcs/
 HEAD		= header/
-NAME		= megaphone
+NAME		= accounting
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
 OBJ			= ${SRC:.cpp=.o}
 PRE_OBJ		= obj/
@@ -30,7 +30,7 @@ $(PRE_OBJ)%.o:$(PRE_SRC)%.cpp
 			${CC} ${CFLAGS} -I ${HEAD} -o $@ -c $< 
 
 ${NAME}:	${OBJS}
-			${CC} ${CFLAGS} -I ${HEAD} ${OBJS} -o ${NAME} -g
+			${CC} ${CFLAGS} -I ${HEAD} ${OBJS} -o ${NAME}
 
 clean: 
 			${RM} ${OBJS}
