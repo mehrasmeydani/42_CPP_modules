@@ -6,7 +6,7 @@
 #    By: mehras <mehras@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 14:44:18 by codespace         #+#    #+#              #
-#    Updated: 2025/11/27 23:47:23 by mehras           ###   ########.fr        #
+#    Updated: 2025/12/19 05:14:54 by mehras           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ $(PRE_OBJ)%.o:$(PRE_SRC)%.cpp
 			${CC} ${CFLAGS} -I ${HEAD} -o $@ -c $< 
 
 ${NAME}:	${OBJS}
-			${CC} ${CFLAGS} -I ${HEAD} ${SRCS} -o ${NAME}
+			${CC} ${CFLAGS} -I ${HEAD} ${OBJS} -o ${NAME}
 
 clean: 
 			${RM} ${OBJS}
