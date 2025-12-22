@@ -5,10 +5,10 @@
 class Fixed
 {
 	public:
-		int		getRawBits(void) const;
-		void	setRawBits(int const raw);
-		float	toFloat(void) const;
-		int		toInt(void) const;
+		int				getRawBits(void) const;
+		void			setRawBits(int const raw);
+		float			toFloat(void) const;
+		int				toInt(void) const;
 
 
 	private:
@@ -20,25 +20,30 @@ class Fixed
 		Fixed(const float raw);
 		Fixed(const Fixed &input);
 
-		bool	operator>(const Fixed &input);
-		bool	operator<(const Fixed &input);
-		bool	operator>=(const Fixed &input);
-		bool	operator<=(const Fixed &input);
-		bool	operator==(const Fixed &input);
-		bool	operator!=(const Fixed &input);
+		bool			operator>(const Fixed &input);
+		bool			operator<(const Fixed &input);
+		bool			operator>=(const Fixed &input);
+		bool			operator<=(const Fixed &input);
+		bool			operator==(const Fixed &input);
+		bool			operator!=(const Fixed &input);
 
-		Fixed&	operator++(void);
-		Fixed	operator++(int);
-		Fixed&	operator--(void);
-		Fixed	operator--(int);
+		Fixed&			operator++(void);
+		Fixed			operator++(int);
+		Fixed&			operator--(void);
+		Fixed			operator--(int);
 		
-		Fixed&	operator=(const Fixed &input);
-		Fixed	operator*(const Fixed &input);
-		Fixed	operator/(const Fixed &input);
-		Fixed	operator-(const Fixed &input);
-		Fixed	operator+(const Fixed &input);
-		Fixed&	min(const Fixed &input1, const F)
+		Fixed&			operator=(const Fixed &input);
+		Fixed			operator*(const Fixed &input);
+		Fixed			operator/(const Fixed &input);
+		Fixed			operator-(const Fixed &input);
+		Fixed			operator+(const Fixed &input);
 
+		Fixed&			min(Fixed &input1, Fixed &input2);
+		Fixed&			max(Fixed &input1, Fixed &input2);
+
+		const Fixed&	min(const Fixed &input1, const Fixed &input2);
+		const Fixed&	max(const Fixed &input1, const Fixed &input2);
+		
 		~Fixed();
 		Fixed();
 };

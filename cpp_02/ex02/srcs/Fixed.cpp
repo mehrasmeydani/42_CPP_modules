@@ -165,4 +165,22 @@ void Fixed::setRawBits(int const raw)
 
 /*********		value manipulation	*********/
 
+const Fixed&	Fixed::min(const Fixed &input1, const Fixed &input2)
+{
+	return ((input1.fixedPointValue < input2.fixedPointValue) ? input1 : input2);
+}
 
+Fixed&	Fixed::min(Fixed &input1, Fixed &input2)
+{
+	return ((input1 < input2) ? input1 : input2);
+}
+
+const Fixed&	Fixed::max(const Fixed &input1, const Fixed &input2)
+{
+	return ((input1.fixedPointValue > input2.fixedPointValue) ? input1 : input2);
+}
+
+Fixed&	Fixed::max(Fixed &input1, Fixed &input2)
+{
+	return ((input1 > input2) ? input1 : input2);
+}
