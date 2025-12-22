@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: megardes <megardes@student.42.fr>          +#+  +:+       +#+         #
+#    By: mehras <mehras@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 14:44:18 by codespace         #+#    #+#              #
-#    Updated: 2025/12/22 13:01:45 by megardes         ###   ########.fr        #
+#    Updated: 2025/12/22 00:53:16 by mehras           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC			= main.cpp
+SRC			= Fixed.cpp main.cpp
 SRCS		= ${addprefix ${PRE_SRC}, ${SRC}}
 PRE_SRC		= srcs/
 HEAD		= header/
-NAME		= zombie
+NAME		= Fixed
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
 OBJ			= ${SRC:.cpp=.o}
 PRE_OBJ		= obj/

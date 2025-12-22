@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mehras <mehras@student.42.fr>              +#+  +:+       +#+         #
+#    By: megardes <megardes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 14:44:18 by codespace         #+#    #+#              #
-#    Updated: 2025/12/19 05:13:59 by mehras           ###   ########.fr        #
+#    Updated: 2025/12/22 13:01:29 by megardes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ $(PRE_OBJ)%.o:$(PRE_SRC)%.cpp
 			${CC} ${CFLAGS} -I ${HEAD} -o $@ -c $< 
 
 ${NAME}:	${OBJS}
-			${CC} ${CFLAGS} -I ${HEAD} ${OBJS} -o ${NAME} -g
+			${CC} ${CFLAGS} -I ${HEAD} ${OBJS} -o ${NAME}
 
 clean: 
 			${RM} ${OBJS}

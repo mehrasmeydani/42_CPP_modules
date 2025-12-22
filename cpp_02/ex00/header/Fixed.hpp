@@ -12,8 +12,8 @@ class Fixed
 		static const int	fractionalBits = 8;
 
 	public:
-		Fixed(const Fixed &other);
-		Fixed& operator=(const Fixed &other);
+		Fixed(const Fixed &input);
+		Fixed& operator=(const Fixed &input);
 		~Fixed();
 		Fixed();
 };

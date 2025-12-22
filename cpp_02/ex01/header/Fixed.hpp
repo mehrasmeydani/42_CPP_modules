@@ -18,8 +18,8 @@ class Fixed
 	public:
 		Fixed(const int raw);
 		Fixed(const float raw);
-		Fixed(const Fixed &other);
-		Fixed& operator=(const Fixed &other);
+		Fixed(const Fixed &input);
+		Fixed& operator=(const Fixed &input);
 		~Fixed();
 		Fixed();
 };
