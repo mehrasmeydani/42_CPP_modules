@@ -4,7 +4,7 @@ int	main(int argc, char **argv)
 {
 	if (argc > 1)
 	{
-		for (size_t i = 1; i < argc; i++)
+		for (int i = 1; i < argc; i++)
 		{
 			for (size_t j = 0; argv[i][j]; j++)
 				argv[i][j] = (char)toupper(argv[i][j]);

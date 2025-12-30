@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mehras <mehras@student.42.fr>              +#+  +:+       +#+         #
+#    By: megardes <megardes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 14:44:18 by codespace         #+#    #+#              #
-#    Updated: 2025/12/19 05:13:38 by mehras           ###   ########.fr        #
+#    Updated: 2025/12/30 16:51:06 by megardes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@ SRC			= tests.cpp Account.cpp
 SRCS		= ${addprefix ${PRE_SRC}, ${SRC}}
 PRE_SRC		= srcs/
 HEAD		= header/
+HEADS		= Contact.hpp PhoneBook.hpp
+HEAD_H		= ${addprefix ${HEAD}, ${HEADS}}
 NAME		= accounting
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
 OBJ			= ${SRC:.cpp=.o}
@@ -25,7 +27,7 @@ MAKEFLAGS	+= --no-print-directory
 
 all:		${NAME}
 
-$(PRE_OBJ)%.o:$(PRE_SRC)%.cpp
+$(PRE_OBJ)%.o:$(PRE_SRC)%.cpp $(HEAD_H)
 			mkdir -p $(PRE_OBJ)
 			${CC} ${CFLAGS} -I ${HEAD} -o $@ -c $< 
 

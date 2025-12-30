@@ -18,25 +18,16 @@ void	PhoneBook::set_book(void)
 	Contact 	newContact;
 	std::string	input;
 
-	if (len < 8)
-	{
-		newContact.set_conact();
-		this->Contacts[this->len] = newContact;
-		if (this->Contacts[this->len].exit == 1)
-			return ((void)(this->exit = 1));
-		len++;
-	}
-	else
-	{
-		this->Contacts[7].set_conact();
-		if (this->Contacts[7].exit == 1)
-			return ((void)(this->exit = 1));
-	}
+	newContact.set_conact();
+	this->Contacts[len % 8] = newContact;
+	if (this->Contacts[this->len].exit == 1)
+		return ((void)(this->exit = 1));
+	len++;
 }
 
 void	PhoneBook::get_book()
 {
-	int	x = 0;
+	int	x = -1;
 	std::string tmp;
 
 	if (this->len == 0)
@@ -44,9 +35,15 @@ void	PhoneBook::get_book()
 		std::cout << "THE PHONEBOOK IS EMPTY!" << std::endl;
 		return ;
 	}
+	while (++x < this->len && x < 8)
+	{
+		std::cout << std::right << std::setw(10) << x + 1 << std::flush;
+		this->Contacts[x].get_conact();
+	}
+	x = 0;
 	while (x == 0)
 	{
-		std::cout << "PLEASE ENTER A NUMBER BETWEEN " << 1 << " AND " << len << std::endl;
+		std::cout << "PLEASE ENTER A NUMBER BETWEEN " << 1 << " AND " << (len <= 8 ? len : 8) << std::endl;
 		std::cin >> x;
 		if (std::cin.eof())
 		{
@@ -59,7 +56,7 @@ void	PhoneBook::get_book()
    			std::cout << "A NUMBER!" << std::endl;
 			x = 0;
 		}
-		else if (x < 1 || x > len)
+		else if (x < 1 || x > (len <= 8 ? len : 8))
 		{
 			std::cout << "WOW YOU CAN'T FOLLOW INSTRUCTIONS" << std::endl;
 			x = 0;
@@ -67,9 +64,7 @@ void	PhoneBook::get_book()
 		else
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
-	std::cout << std::left << std::setw(10) << x << std::flush;
-	this->Contacts[x - 1].get_conact();
-
+	this->Contacts[x - 1].get_conact_2();
 }
 
 void	PhoneBook::prompt()

@@ -6,7 +6,7 @@
 #    By: megardes <megardes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 14:44:18 by codespace         #+#    #+#              #
-#    Updated: 2025/12/30 13:52:28 by megardes         ###   ########.fr        #
+#    Updated: 2025/12/30 15:57:41 by megardes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@ SRC			= main.cpp Contact.cpp PhoneBook.cpp
 SRCS		= ${addprefix ${PRE_SRC}, ${SRC}}
 PRE_SRC		= srcs/
 HEAD		= header/
+HEADS		= Contact.hpp PhoneBook.hpp
+HEAD_H		= ${addprefix ${HEAD}, ${HEADS}}
 NAME		= phonebook
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
 OBJ			= ${SRC:.cpp=.o}
@@ -25,7 +27,7 @@ MAKEFLAGS	+= --no-print-directory
 
 all:		${NAME}
 
-$(PRE_OBJ)%.o:$(PRE_SRC)%.cpp
+$(PRE_OBJ)%.o:$(PRE_SRC)%.cpp $(HEAD_H)
 			mkdir -p $(PRE_OBJ)
 			${CC} ${CFLAGS} -I ${HEAD} -o $@ -c $< 
 
