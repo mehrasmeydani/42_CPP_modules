@@ -18,4 +18,5 @@ class Contact
 	public:
 		void	set_conact(void);
 		void	get_conact(void);
+		bool	exit;
 };
