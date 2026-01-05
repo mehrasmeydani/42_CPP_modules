@@ -12,32 +12,14 @@ void Harl::complain(std::string level)
 		"WARNING",
 		"ERROR"
 	};
-
-	for (size_t i = 0; i < sizeof(levels) / sizeof(levels[0]); i++)
-	{
-		if (level == levels[i])
-		{
-			j = i;
-			break ;
-		}
-	}
-	switch (j)
-	{
-		case 0:
-			this->debug();
-			break ;
-		case 1:
-			this->info();
-			break ;
-		case 2:
-			this->warning();
-			break ;
-		case 3:
-			this->error();
-			break ;
-		default:
-			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
-	}
+	void (Harl::*func_p[4])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+	while (++j < 4)
+		if (level == levels[j])
+			break;
+	if (j > 3)
+		std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+	else
+		(this->*func_p[j])();
 }
 
 void Harl::debug(void)
