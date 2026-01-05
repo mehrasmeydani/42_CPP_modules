@@ -4,12 +4,14 @@
 
 class   ClapTrap
 {
+	private:
+		void	getStats() const;
+
 	protected:
 		std::string     Name;
 		unsigned int	HP;
 		unsigned int	EP;
 		unsigned int	AD;
-		void	getStats() const;
 
 	public:
 		void	attack(const std::string& target);

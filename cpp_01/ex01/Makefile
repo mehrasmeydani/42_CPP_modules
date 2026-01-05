@@ -13,7 +13,9 @@
 SRC			= Zombie.cpp zombieHorde.cpp main.cpp
 SRCS		= ${addprefix ${PRE_SRC}, ${SRC}}
 PRE_SRC		= srcs/
-HEAD		= header/
+HEAD		= Zombie.hpp
+HEADS		= ${addprefix ${PRE_HEAD}, ${HEAD}}
+PRE_HEAD	= header/
 NAME		= Moar_brainz!
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
 OBJ			= ${SRC:.cpp=.o}
@@ -25,12 +27,12 @@ MAKEFLAGS	+= --no-print-directory
 
 all:		${NAME}
 
-$(PRE_OBJ)%.o:$(PRE_SRC)%.cpp
+$(PRE_OBJ)%.o:$(PRE_SRC)%.cpp	$(HEADS)
 			mkdir -p $(PRE_OBJ)
-			${CC} ${CFLAGS} -I ${HEAD} -o $@ -c $< 
+			${CC} ${CFLAGS} -I ${PRE_HEAD} -o $@ -c $< 
 
 ${NAME}:	${OBJS}
-			${CC} ${CFLAGS} -I ${HEAD} ${OBJS} -o ${NAME}
+			${CC} ${CFLAGS} -I ${PRE_HEAD} ${OBJS} -o ${NAME}
 
 clean: 
 			${RM} ${OBJS}

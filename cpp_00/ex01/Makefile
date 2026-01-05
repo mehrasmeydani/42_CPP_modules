@@ -13,9 +13,9 @@
 SRC			= main.cpp Contact.cpp PhoneBook.cpp
 SRCS		= ${addprefix ${PRE_SRC}, ${SRC}}
 PRE_SRC		= srcs/
-HEAD		= header/
-HEADS		= Contact.hpp PhoneBook.hpp
-HEAD_H		= ${addprefix ${HEAD}, ${HEADS}}
+PRE_HEAD	= header/
+HEAD		= Contact.hpp PhoneBook.hpp
+HEADS		= ${addprefix ${PRE_HEAD}, ${HEAD}}
 NAME		= phonebook
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
 OBJ			= ${SRC:.cpp=.o}
@@ -27,12 +27,12 @@ MAKEFLAGS	+= --no-print-directory
 
 all:		${NAME}
 
-$(PRE_OBJ)%.o:$(PRE_SRC)%.cpp $(HEAD_H)
+$(PRE_OBJ)%.o:$(PRE_SRC)%.cpp $(HEADS)
 			mkdir -p $(PRE_OBJ)
-			${CC} ${CFLAGS} -I ${HEAD} -o $@ -c $< 
+			${CC} ${CFLAGS} -I ${PRE_HEAD} -o $@ -c $< 
 
 ${NAME}:	${OBJS}
-			${CC} ${CFLAGS} -I ${HEAD} ${OBJS} -o ${NAME}
+			${CC} ${CFLAGS} -I ${PRE_HEAD} ${OBJS} -o ${NAME}
 
 clean: 
 			${RM} ${OBJS}

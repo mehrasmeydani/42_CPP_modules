@@ -10,10 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC			= ClapTrap.cpp main.cpp
+SRC			= ClapTrap.cpp ScavTrap.cpp
 SRCS		= ${addprefix ${PRE_SRC}, ${SRC}}
 PRE_SRC		= srcs/
-HEAD		= header/
+HEAD		= ClapTrap.hpp ScavTrap.hpp
+HEADS		= ${addprefix ${PRE_HEAD}, ${HEAD}}
+PRE_HEAD	= header/
 NAME		= Trap
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
 OBJ			= ${SRC:.cpp=.o}
@@ -25,12 +27,12 @@ MAKEFLAGS	+= --no-print-directory
 
 all:		${NAME}
 
-$(PRE_OBJ)%.o:$(PRE_SRC)%.cpp
+$(PRE_OBJ)%.o:$(PRE_SRC)%.cpp $(HEADS)
 			mkdir -p $(PRE_OBJ)
-			${CC} ${CFLAGS} -I ${HEAD} -o $@ -c $< 
+			${CC} ${CFLAGS} -I ${PRE_HEAD} -o $@ -c $< 
 
 ${NAME}:	${OBJS}
-			${CC} ${CFLAGS} -I ${HEAD} ${OBJS} -o ${NAME}
+			${CC} ${CFLAGS} -I ${PRE_HEAD} ${OBJS} -o ${NAME}
 
 clean: 
 			${RM} ${OBJS}

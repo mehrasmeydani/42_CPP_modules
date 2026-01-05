@@ -33,7 +33,7 @@ void ScavTrap::getStats() const
 	std::cout << "ScavTrap " << this->Name << " Stats -- HP: " << this->HP << ", EP: " << this->EP << ", AD: " << this->AD << std::endl;
 }
 
-void ScavTrap::gaurdGate()
+void ScavTrap::guardGate()
 {
 	if (this->HP == 0)
 	{
