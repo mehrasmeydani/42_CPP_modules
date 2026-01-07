@@ -3,7 +3,7 @@
 ClapTrap::ClapTrap(std::string name) : 
 Name(name), HP(10), EP(10), AD(0)
 {
-	std::cout << "Constructor called" << std::endl;
+	std::cout << "ClapTrap " << name << " constructed." <<  std::endl;
 }
 
 void	ClapTrap::attack(const std::string& target)
@@ -67,5 +67,5 @@ const std::string&	ClapTrap::getName() const
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "ClapTrap " << this->getName() << " destructed." <<  std::endl;
 }

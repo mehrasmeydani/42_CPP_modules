@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mehras <mehras@student.42.fr>              +#+  +:+       +#+         #
+#    By: megardes <megardes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 14:44:18 by codespace         #+#    #+#              #
-#    Updated: 2025/12/22 00:53:16 by mehras           ###   ########.fr        #
+#    Updated: 2026/01/07 18:09:57 by megardes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC			= ClapTrap.cpp ScavTrap.cpp
+SRC			= ClapTrap.cpp ScavTrap.cpp main.cpp
 SRCS		= ${addprefix ${PRE_SRC}, ${SRC}}
 PRE_SRC		= srcs/
 HEAD		= ClapTrap.hpp ScavTrap.hpp
