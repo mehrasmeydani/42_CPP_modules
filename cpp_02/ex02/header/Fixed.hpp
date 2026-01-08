@@ -38,12 +38,12 @@ class Fixed
 		Fixed			operator-(const Fixed &input);
 		Fixed			operator+(const Fixed &input);
 
-		Fixed&			min(Fixed &input1, Fixed &input2);
-		Fixed&			max(Fixed &input1, Fixed &input2);
+		static const	Fixed&	min(const Fixed &input1, const Fixed &input2);
+		static const	Fixed&	max(const Fixed &input1, const Fixed &input2);
 
-		const Fixed&	min(const Fixed &input1, const Fixed &input2);
-		const Fixed&	max(const Fixed &input1, const Fixed &input2);
-		
+		static  Fixed&	min(Fixed &input1, Fixed &input2);
+		static  Fixed&	max(Fixed &input1, Fixed &input2);
+
 		~Fixed();
 		Fixed();
 };
