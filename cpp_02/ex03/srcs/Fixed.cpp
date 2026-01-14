@@ -99,14 +99,14 @@ const Fixed	Fixed::operator-(const Fixed& input) const
 const Fixed	Fixed::operator*(const Fixed&input) const
 {
 	Fixed result;
-	result.setRawBits((this->getRawBits() * input.getRawBits()) >> (this->fractionalBits));
+	result.setRawBits(this->getRawBits() * input.getRawBits() >> this->fixedPointValue);
 	return (result);
 }
 
 const Fixed	Fixed::operator/(const Fixed&input) const
 {
 	Fixed result;
-	result.setRawBits((this->getRawBits() / input.getRawBits()) << (this->fractionalBits));
+	result.setRawBits(this->getRawBits() / input.getRawBits() << this->fixedPointValue);
 	return (result);
 }
 
