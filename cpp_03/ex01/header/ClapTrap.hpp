@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include <iostream>
 
 class   ClapTrap
 {
@@ -18,6 +17,8 @@ class   ClapTrap
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
 		const std::string&	getName() const;
+		ClapTrap& operator=(const ClapTrap& in);
+		ClapTrap(const ClapTrap &in);
 		ClapTrap(std::string name);
 		~ClapTrap();
 };

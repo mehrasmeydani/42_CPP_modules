@@ -1,4 +1,5 @@
 #include "../header/ScavTrap.hpp"
+#include <iostream>
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
@@ -6,6 +7,20 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 	this->EP = 50;
 	this->AD = 20;
 	std::cout << "ScavTrap " << name << " constructed." <<  std::endl;
+}
+
+ScavTrap &ScavTrap::operator=(const ScavTrap& in)
+{
+	this->Name = in.getName();
+	this->AD = in.AD;
+	this->EP = in.EP;
+	this->HP = in.HP;
+	return (*this);
+}
+
+ScavTrap::ScavTrap(const ScavTrap &in) : ClapTrap(in)
+{
+	*this = in;
 }
 
 void	ScavTrap::attack(const std::string& target)

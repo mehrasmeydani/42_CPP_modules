@@ -1,9 +1,24 @@
 #include "../header/ClapTrap.hpp"
+#include <iostream>
 
 ClapTrap::ClapTrap(std::string name) : 
 Name(name), HP(10), EP(10), AD(0)
 {
 	std::cout << "ClapTrap " << name << " constructed." <<  std::endl;
+}
+
+ClapTrap &ClapTrap::operator=(const ClapTrap& in)
+{
+	this->Name = in.getName();
+	this->AD = in.AD;
+	this->EP = in.EP;
+	this->HP = in.HP;
+	return (*this);
+}
+
+ClapTrap::ClapTrap(const ClapTrap &in)
+{
+	*this = in;
 }
 
 void	ClapTrap::attack(const std::string& target)
