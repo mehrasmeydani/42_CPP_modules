@@ -11,8 +11,6 @@ Zombie*	zombieHorde(int N, std::string name)
 		return (zombie_horde);
 	}
 	for (int i = 0; i < N; i++)
-	{
 		zombie_horde[i].set_name(name);
-	}
 	return (zombie_horde);
 }

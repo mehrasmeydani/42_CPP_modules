@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mehras <mehras@student.42.fr>              +#+  +:+       +#+         #
+#    By: megardes <megardes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 14:44:18 by codespace         #+#    #+#              #
-#    Updated: 2025/12/19 05:14:45 by mehras           ###   ########.fr        #
+#    Updated: 2026/01/21 16:49:39 by megardes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ PRE_SRC		= srcs/
 HEAD		= HumanA.hpp HumanB.hpp Weapon.hpp
 PRE_HEAD	= header/
 HEADS		= ${addprefix ${PRE_HEAD}, ${HEAD}}
-NAME		= zombie
+NAME		= Weapon
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
 OBJ			= ${SRC:.cpp=.o}
 PRE_OBJ		= obj/

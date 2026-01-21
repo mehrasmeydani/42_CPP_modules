@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mehras <mehras@student.42.fr>              +#+  +:+       +#+         #
+#    By: megardes <megardes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 14:44:18 by codespace         #+#    #+#              #
-#    Updated: 2025/12/19 05:14:18 by mehras           ###   ########.fr        #
+#    Updated: 2026/01/21 15:56:38 by megardes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC			= Zombie.cpp main.cpp
+SRC			= Zombie.cpp main.cpp newZombie.cpp randomChump.cpp
 SRCS		= ${addprefix ${PRE_SRC}, ${SRC}}
 PRE_SRC		= srcs/
 HEAD		= Zombie.hpp
