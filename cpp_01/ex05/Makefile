@@ -6,7 +6,7 @@
 #    By: megardes <megardes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 14:44:18 by codespace         #+#    #+#              #
-#    Updated: 2025/12/22 13:01:47 by megardes         ###   ########.fr        #
+#    Updated: 2026/01/21 18:45:52 by megardes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ PRE_HEAD	= header/
 HEAD		= Harl.hpp
 HEADS		= ${addprefix $(PRE_HEAD), $(HEAD)}
 NAME		= harl
-CFLAGS		= -Wall -Wextra -Werror -std=c++98
+CFLAGS		= -Wall -Wextra -Werror -std=c++98 #-fsanitize=address,leak,undefined
 OBJ			= ${SRC:.cpp=.o}
 PRE_OBJ		= obj/
 OBJS		= ${addprefix ${PRE_OBJ}, ${OBJ}}

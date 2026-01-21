@@ -6,7 +6,7 @@
 #    By: megardes <megardes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 14:44:18 by codespace         #+#    #+#              #
-#    Updated: 2026/01/21 16:49:39 by megardes         ###   ########.fr        #
+#    Updated: 2026/01/21 17:34:55 by megardes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ HEAD		= HumanA.hpp HumanB.hpp Weapon.hpp
 PRE_HEAD	= header/
 HEADS		= ${addprefix ${PRE_HEAD}, ${HEAD}}
 NAME		= Weapon
-CFLAGS		= -Wall -Wextra -Werror -std=c++98
+CFLAGS		= -Wall -Wextra -Werror -std=c++98 #-fsanitize=address,leak,undefined
 OBJ			= ${SRC:.cpp=.o}
 PRE_OBJ		= obj/
 OBJS		= ${addprefix ${PRE_OBJ}, ${OBJ}}

@@ -6,7 +6,7 @@
 /*   By: megardes <megardes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 23:12:48 by mehras            #+#    #+#             */
-/*   Updated: 2026/01/21 16:47:56 by megardes         ###   ########.fr       */
+/*   Updated: 2026/01/21 17:32:13 by megardes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	main(int argc, char **argv)
 		return (print_error("syntax error"), 1);
 	file_out_name = argv[1];
 	file_out_name.append(".replace");
+	if (!*argv[1] || !*argv[2])
+		return (print_error("syntax error"), 1);
 	std::ifstream	in_file(argv[1]);
 	if (!in_file.is_open())
 		return (std::cerr << "cannot open input file" << std::endl, 1);

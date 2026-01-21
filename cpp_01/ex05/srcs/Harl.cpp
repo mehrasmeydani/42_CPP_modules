@@ -1,11 +1,8 @@
 #include "../header/Harl.hpp"
 #include <iostream>
 
-
 void Harl::complain(std::string level)
 {
-	int j = -1;
-
 	std::string levels[] = {
 		"DEBUG",
 		"INFO",
@@ -13,13 +10,27 @@ void Harl::complain(std::string level)
 		"ERROR"
 	};
 	void (Harl::*func_p[4])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
-	while (++j < 4)
+	int j = 0;
+	for (j = 0; j < 4; j++)
 		if (level == levels[j])
 			break;
-	if (j > 3)
-		std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
-	else
-		(this->*func_p[j])();
+	switch (j)
+	{
+		case 0:
+			(this->*func_p[0])();
+			break ;
+		case 1:
+			(this->*func_p[1])();
+			break ;
+		case 2:
+			(this->*func_p[2])();
+			break ;
+		case 3:
+			(this->*func_p[3])();
+			break ;
+		default:
+			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+	}
 }
 
 void Harl::debug(void)
