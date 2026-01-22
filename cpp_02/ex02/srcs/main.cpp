@@ -1,25 +1,32 @@
 #include <iostream>
+#include <string>
 #include "../header/Fixed.hpp"
+
+static void header(const std::string& label)
+{
+	std::cout << "\n-- " << label << " --" << std::endl;
+}
 
 int main(void)
 {
 	// Subject-provided baseline tests
+
 	Fixed a;
-	Fixed const b(Fixed(5.05f) * Fixed(2));
+	const Fixed b(Fixed(5.05f) * Fixed(2));
 
-	std::cout << a << std::endl;        // 0
-	std::cout << ++a << std::endl;      // 0.00390625 (1 raw step)
-	std::cout << a << std::endl;        // same as above
-	std::cout << a++ << std::endl;      // prints current, then increments
-	std::cout << a << std::endl;        // incremented value
-	std::cout << b << std::endl;        // 10.1016
+	header("pre/post increment");
+	std::cout << a << std::endl;
+	std::cout << ++a << std::endl;
+	std::cout << a << std::endl;
+	std::cout << a++ << std::endl;
+	std::cout << a << std::endl;
+	std::cout << b << std::endl;
 
-	// max/min using static overloads
+	header("min/max statics");
 	std::cout << Fixed::max(a, b) << std::endl;
 	std::cout << Fixed::min(a, b) << std::endl;
-	
 
-	// Comparison operators
+	header("comparisons");
 	std::cout << "(a < b): " << (a < b) << std::endl;
 	std::cout << "(a > b): " << (a > b) << std::endl;
 	std::cout << "(a <= b): " << (a <= b) << std::endl;
@@ -27,25 +34,36 @@ int main(void)
 	std::cout << "(a == b): " << (a == b) << std::endl;
 	std::cout << "(a != b): " << (a != b) << std::endl;
 
-	// Pre/Post decrement tests
+	header("pre/post decrement");
 	std::cout << --a << std::endl;
 	std::cout << a-- << std::endl;
 	std::cout << a << std::endl;
 
-	// Arithmetic operators (multiplication/division implemented via toFloat)
-	Fixed c(10);       // 10.0
-	Fixed d(2.5f);     // 2.5
+	header("arithmetic");
+	Fixed c(10);
+	Fixed d(2.5f);
 	std::cout << "c: " << c << ", d: " << d << std::endl;
 	std::cout << "c * d: " << (c * d) << std::endl;
 	std::cout << "c / d: " << (c / d) << std::endl;
 
-	// min/max overloads
+	header("min/max overloads");
 	std::cout << "min(c, d): " << Fixed::min(c, d) << std::endl;
 	std::cout << "max(c, d): " << Fixed::max(c, d) << std::endl;
 
-	// Conversion helpers
+	header("conversion helper");
 	Fixed e(42.42f);
-	std::cout << "e: " << e << ", e.toInt(): " << e.toInt() << std::endl;
+	std::cout << "e: " << e << ", e.toInt(): " << e.toInt() << std::endl << "\n\n";
+
+	Fixed g;
+	Fixed const h( Fixed( 5.05f ) * Fixed( 2 ) );
+	std::cout << g << std::endl;
+	std::cout << ++g << std::endl;
+	std::cout << g << std::endl;
+	std::cout << g++ << std::endl;
+	std::cout << g << std::endl;
+	std::cout << h << std::endl;
+	std::cout << Fixed::max( g, h ) << std::endl;
+	return 0;
 
 	return 0;
 }
