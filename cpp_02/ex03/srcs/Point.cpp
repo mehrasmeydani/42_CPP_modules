@@ -12,13 +12,7 @@ Point::Point(const Point& in) : x(in.x), y(in.y)
 {	
 }
 
-Point& Point::operator=(Point& in)
-{
-	(void)in;
-	return (*this);
-}
-
-const Point& Point::operator=(const Point& in)
+Point& Point::operator=(const Point& in)
 {
 	(void)in;
 	return (*this);

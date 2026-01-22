@@ -1,5 +1,6 @@
 #include "../header/ClapTrap.hpp"
 #include "../header/ScavTrap.hpp"
+#include <iostream>
 
 int main() {
 	std::cout << "___creating___" << std::endl;
