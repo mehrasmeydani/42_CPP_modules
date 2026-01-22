@@ -1,6 +1,15 @@
 #include "../header/ClapTrap.hpp"
 #include <iostream>
 
+ClapTrap::ClapTrap()
+{
+	this->Name = "default";
+	this->HP = 10;
+	this->EP = 10;
+	this->AD = 0;
+	std::cout << "ClapTrap default constructor called" << std::endl;
+}
+
 ClapTrap::ClapTrap(std::string name) : 
 Name(name), HP(10), EP(10), AD(0)
 {
@@ -77,7 +86,7 @@ void	ClapTrap::getStats() const
 
 const std::string&	ClapTrap::getName() const
 {
-	return (const_cast<std::string&>(this->Name));
+	return (this->Name);
 }
 
 ClapTrap::~ClapTrap()

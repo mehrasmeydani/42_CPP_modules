@@ -1,4 +1,12 @@
 #include "../header/FragTrap.hpp"
+#include <iostream>
+
+FragTrap::FragTrap() : ClapTrap("default")
+{
+	this->HP = 100;
+	this->EP = 100;
+	this->AD = 30;
+}
 
 FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
@@ -6,6 +14,22 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name)
 	this->EP = 100;
 	this->AD = 30;
 	std::cout << "FragTrap " << name << " constructed." <<  std::endl;
+}
+
+FragTrap::FragTrap(const FragTrap& in) : ClapTrap(in.getName())
+{
+	this->AD = in.AD;
+	this->HP = in.HP;
+	this->EP = in.EP;
+}
+
+FragTrap& FragTrap::operator=(const FragTrap &in)
+{
+	this->Name = in.getName();
+	this->AD = in.AD;
+	this->HP = in.HP;
+	this->EP = in.EP;
+	return (*this);
 }
 
 void	FragTrap::attack(const std::string& target)

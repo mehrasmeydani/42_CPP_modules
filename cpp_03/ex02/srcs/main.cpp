@@ -1,6 +1,7 @@
 #include "../header/ClapTrap.hpp"
 #include "../header/ScavTrap.hpp"
 #include "../header/FragTrap.hpp"
+#include <iostream>
 
 int main() {
 	std::cout << "\n_________TESTS_________" << std::endl;

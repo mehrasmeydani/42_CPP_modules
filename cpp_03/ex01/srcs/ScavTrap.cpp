@@ -23,6 +23,13 @@ ScavTrap::ScavTrap(const ScavTrap &in) : ClapTrap(in)
 	*this = in;
 }
 
+ScavTrap::ScavTrap() : ClapTrap("default")
+{
+	this->HP = 100;
+	this->EP = 50;
+	this->AD = 20;
+}
+
 void	ScavTrap::attack(const std::string& target)
 {
 	if (this->EP == 0)

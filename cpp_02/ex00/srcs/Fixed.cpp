@@ -4,7 +4,7 @@
 Fixed::Fixed()
 {
 	this->fixedPointValue = 0;
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed &input)
@@ -16,7 +16,7 @@ Fixed::Fixed(const Fixed &input)
 Fixed& Fixed::operator=(const Fixed &input)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->fixedPointValue = input.getRawBits();
+	this->setRawBits(input.getRawBits());
 	return (*this);
 }
 

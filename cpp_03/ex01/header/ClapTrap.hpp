@@ -20,5 +20,6 @@ class   ClapTrap
 		ClapTrap& operator=(const ClapTrap& in);
 		ClapTrap(const ClapTrap &in);
 		ClapTrap(std::string name);
+		ClapTrap();
 		~ClapTrap();
 };

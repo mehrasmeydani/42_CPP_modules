@@ -128,7 +128,7 @@ Fixed::Fixed(const float raw)
 
 Fixed::Fixed()
 {
-	//std::cout << "Default constructor called" << std::endl;
+	//std::cout << "default constructor called" << std::endl;
 	this->fixedPointValue = 0;
 }
 

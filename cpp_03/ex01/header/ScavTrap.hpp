@@ -8,6 +8,7 @@ class ScavTrap : virtual public ClapTrap
 		void	getStats() const;
 
 	public:
+		ScavTrap();
 		ScavTrap(std::string name);
 		ScavTrap& operator=(const ScavTrap& in);
 		ScavTrap(const ScavTrap &in);
