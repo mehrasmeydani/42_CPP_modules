@@ -15,10 +15,7 @@ Dog::Dog(const Dog &input) : Animal(input)
 Dog& Dog::operator=(const Dog &input)
 {
 	std::cout << "Dog copy assignment operator called" << std::endl;
-	if (this != &input)
-	{
-		this->type = input.getType();
-	}
+	Animal::operator=(input);
 	return (*this);
 }
 
@@ -30,9 +27,4 @@ Dog::~Dog()
 void Dog::makeSound() const
 {
 	std::cout << "Woof Woof!" << std::endl;
-}
-
-const std::string& Dog::getType(void) const
-{
-	return (this->type);
 }
