@@ -10,8 +10,8 @@ class Animal
 		Animal();
 		Animal(const std::string &name);
 		Animal(const Animal &in);
+		Animal& operator=(const Animal &in);
 		virtual const std::string& getType(void) const;
-		virtual Animal& operator=(const Animal &in);
 		virtual ~Animal();
 		virtual void	makeSound(void) const;
 };

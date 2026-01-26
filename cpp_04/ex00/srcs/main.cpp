@@ -1,6 +1,8 @@
 #include "../header/Animal.hpp"
 #include "../header/Cat.hpp"
 #include "../header/Dog.hpp"
+#include "../header/WrongAnimal.hpp"
+#include "../header/WrongCat.hpp"
 #include <iostream>
 
 int main()
@@ -13,6 +15,8 @@ int main()
 	i->makeSound();
 	j->makeSound();
 	meta->makeSound();
+	const WrongAnimal* wrong = new WrongAnimal();
+	const WrongAnimal* wrongCat = new WrongCat();
 	// Dog testAnimal;
 	// testAnimal = *dynamic_cast<const Dog*>(j);
 	// std::cout << "After assignment testAnimal type: " << testAnimal.getType() << std::endl;
@@ -20,5 +24,7 @@ int main()
 	delete meta;
 	delete j;
 	delete i;
+	delete wrong;
+	delete wrongCat;
 	return 0;
 }

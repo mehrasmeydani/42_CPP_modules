@@ -6,14 +6,14 @@
 #    By: mehras <mehras@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 14:44:18 by codespace         #+#    #+#              #
-#    Updated: 2026/01/26 22:41:15 by mehras           ###   ########.fr        #
+#    Updated: 2026/01/26 23:40:25 by mehras           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC			= Dog.cpp main.cpp Cat.cpp Animal.cpp
+SRC			= Dog.cpp main.cpp Cat.cpp Animal.cpp WrongAnimal.cpp WrongCat.cpp
 SRCS		= ${addprefix ${PRE_SRC}, ${SRC}}
 PRE_SRC		= srcs/
-HEAD		= Dog.hpp Cat.hpp Animal.hpp
+HEAD		= Dog.hpp Cat.hpp Animal.hpp WrongAnimal.hpp WrongCat.hpp
 HEADS		= ${addprefix ${PRE_HEAD}, ${HEAD}}
 PRE_HEAD	= header/
 NAME		= Animal
