@@ -34,7 +34,7 @@ int main() {
 	Bureaucrat high("HighRank", 2);
 	Bureaucrat lowRank("LowRank", 100);
 	try {
-		Form taxForm("Tax Form", 25, 50);
+		Form taxForm("Tax Form", 25, 10);
 		std::cout << taxForm;
 		std::cout << "Form signed status: " << taxForm.getSignedStatus() << std::endl;
 		std::cout << "Sign permission level: " << taxForm.getSignPermission() << std::endl;
@@ -47,7 +47,7 @@ int main() {
 	}
 
 	try {
-		Form restrictedForm("Restricted Form", 3, 5);
+		Form restrictedForm("Restricted Form", 3, 2);
 		std::cout << "\nTrying to sign with grade " << lowRank.getGrade() << " (need " << restrictedForm.getSignPermission() << ")..." << std::endl;
 		lowRank.signForm(restrictedForm);
 		std::cout << "\nTrying to sign with grade " << high.getGrade() << " (need " << restrictedForm.getSignPermission() << ")..." << std::endl;
