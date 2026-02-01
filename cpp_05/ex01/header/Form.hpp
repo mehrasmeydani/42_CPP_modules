@@ -14,8 +14,8 @@ class Form {
 		bool getSignedStatus(void) const;
 		const std::string& getName(void) const;
 		void beSigned(const Bureaucrat& employee);
-		const int getSignPermission(void) const;
-		const int getExecPermission(void) const;
+		int getSignPermission(void) const;
+		int getExecPermission(void) const;
 
 		class GradeTooLowException : public std::exception {
 			public:
@@ -25,6 +25,8 @@ class Form {
 		Form();
 		Form(const std::string& name, const int signPermission, const int execPermission);
 		Form(const Form& in);
-		Form &operator=(const Form& in);
+		Form& operator=(const Form& in);
 		~Form();
 };
+
+std::ostream& operator<<(std::ostream& os, const Form& in);

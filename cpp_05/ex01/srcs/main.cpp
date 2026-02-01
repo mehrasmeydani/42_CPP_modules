@@ -1,4 +1,5 @@
 #include "../header/Bureaucrat.hpp"
+#include "../header/Form.hpp"
 #include <iostream>
 
 int main() {
@@ -24,6 +25,33 @@ int main() {
 		std::cout << alice; // stops here
 		alice.incrementGrade();
 		std::cout << alice;
+	} catch (const std::exception& e) {
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+
+	// Form tests
+	std::cout << "\n=== Form Tests ===" << std::endl;
+	Bureaucrat high("HighRank", 2);
+	Bureaucrat lowRank("LowRank", 100);
+	try {
+		Form taxForm("Tax Form", 25, 50);
+		std::cout << taxForm;
+		std::cout << "Form signed status: " << taxForm.getSignedStatus() << std::endl;
+		std::cout << "Sign permission level: " << taxForm.getSignPermission() << std::endl;
+		std::cout << "Exec permission level: " << taxForm.getExecPermission() << std::endl;
+
+		std::cout << "\nTrying to sign with grade " << high.getGrade() << " (need " << taxForm.getSignPermission() << ")..." << std::endl;
+		high.signForm(taxForm);
+	} catch (const std::exception& e) {
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+
+	try {
+		Form restrictedForm("Restricted Form", 3, 5);
+		std::cout << "\nTrying to sign with grade " << lowRank.getGrade() << " (need " << restrictedForm.getSignPermission() << ")..." << std::endl;
+		lowRank.signForm(restrictedForm);
+		std::cout << "\nTrying to sign with grade " << high.getGrade() << " (need " << restrictedForm.getSignPermission() << ")..." << std::endl;
+		high.signForm(restrictedForm); // works because form throws an exeption not Bureaucrat
 	} catch (const std::exception& e) {
 		std::cerr << "Exception: " << e.what() << std::endl;
 	}
