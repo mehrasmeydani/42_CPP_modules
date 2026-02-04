@@ -1,13 +1,13 @@
 #include "../header/Bureaucrat.hpp"
-#include "../header/Form.hpp"
+#include "../header/AForm.hpp"
 #include <iostream>
 
-void	Bureaucrat::signForm(Form &form) {
+void	Bureaucrat::signForm(AForm &AForm) {
 	try {
-		form.beSigned(*this);
-		std::cout << getName() << " signed " << form.getName() << " succesfully!"<< std::endl;
-	} catch (Form::GradeTooLowException &e) {
-		std::cout << getName() << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
+		AForm.beSigned(*this);
+		std::cout << getName() << " signed " << AForm.getName() << " succesfully!"<< std::endl;
+	} catch (AForm::GradeTooLowException &e) {
+		std::cout << getName() << " couldn't sign " << AForm.getName() << " because " << e.what() << std::endl;
 	}
 }
 

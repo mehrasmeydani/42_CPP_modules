@@ -1,10 +1,6 @@
 #include "../header/Form.hpp"
 #include <iostream>
 
-// bool getSignedStatus(void) const;
-// const std::string& getName(void) const;
-// const int getSignPermission(void) const;
-
 void Form::beSigned(const Bureaucrat& employee) {
 	if (this->getSignedStatus() != 0)
 		return ;
@@ -34,10 +30,18 @@ const char* Form::GradeTooLowException::what(void) const throw() {
 	return "Grade Too Low";
 }
 
+const char* Form::GradeTooHighException::what(void) const throw() {
+	return "Grade Too High";
+}
+
 Form::Form() : name("Random Form"), Signed(0), signPermission(75), execPermission(20) {
 }
 
 Form::Form(const std::string& name, const int signPermission, const int execPermission) : name(name), Signed(0), signPermission(signPermission), execPermission(execPermission) {
+	if (getExecPermission() > 150 || getSignPermission() > 150)
+		throw Form::GradeTooLowException();
+	if (getExecPermission() < 1 || getSignPermission() < 1)
+		throw Form::GradeTooHighException();
 }
 
 Form::Form(const Form& in) : name(in.getName()), Signed(in.getSignedStatus()), signPermission(in.getSignPermission()), execPermission(in.getExecPermission()) {
