@@ -7,6 +7,7 @@
 class AForm {
 	private:
 		const std::string name;
+		const std::string target;
 		bool Signed;
 		const int signPermission;
 		const int execPermission;
