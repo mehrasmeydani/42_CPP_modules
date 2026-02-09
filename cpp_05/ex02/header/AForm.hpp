@@ -6,15 +6,17 @@
 
 class AForm {
 	private:
-		const std::string name;
 		const std::string target;
 		bool Signed;
 		const int signPermission;
 		const int execPermission;
+		const std::string name;
 	public:
 		bool getSignedStatus(void) const;
+		void setSignedStatus(bool in);
 		const std::string& getName(void) const;
-		virtual void beSigned(const Bureaucrat& employee) = 0;
+		const std::string& getTarget(void) const;
+		void beSigned(const Bureaucrat& employee);
 		int getSignPermission(void) const;
 		int getExecPermission(void) const;
 
@@ -29,7 +31,7 @@ class AForm {
 		};
 
 		AForm();
-		AForm(const std::string& name, const int signPermission, const int execPermission);
+		AForm(const std::string& name, const int signPermission, const int execPermission, const std::string& target);
 		AForm(const AForm& in);
 		AForm& operator=(const AForm& in);
 		virtual ~AForm() = 0;
