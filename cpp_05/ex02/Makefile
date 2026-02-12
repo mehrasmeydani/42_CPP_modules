@@ -38,7 +38,7 @@ clean:
 			${RM} ${OBJS}
 
 fclean: 	clean
-			${RM} ${NAME} $(PRE_OBJ)
+			${RM} ${NAME} $(PRE_OBJ) *_shrubbery
 
 re:			fclean all
 			
