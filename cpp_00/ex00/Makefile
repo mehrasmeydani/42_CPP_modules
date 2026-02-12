@@ -6,7 +6,7 @@
 #    By: megardes <megardes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 14:44:18 by codespace         #+#    #+#              #
-#    Updated: 2025/12/30 15:55:33 by megardes         ###   ########.fr        #
+#    Updated: 2026/02/12 00:30:02 by megardes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,17 +20,17 @@ OBJ			= ${SRC:.cpp=.o}
 PRE_OBJ		= obj/
 OBJS		= ${addprefix ${PRE_OBJ}, ${OBJ}}
 RM			= rm -fr
-CC			= c++
+CXX			= c++
 MAKEFLAGS	+= --no-print-directory
 
 all:		${NAME}
 
 $(PRE_OBJ)%.o:$(PRE_SRC)%.cpp
 			mkdir -p $(PRE_OBJ)
-			${CC} ${CFLAGS} -I ${HEAD} -o $@ -c $< 
+			${CXX} ${CFLAGS} -I ${HEAD} -o $@ -c $< 
 
 ${NAME}:	${OBJS}
-			${CC} ${CFLAGS} -I ${HEAD} ${OBJS} -o ${NAME}
+			${CXX} ${CFLAGS} -I ${HEAD} ${OBJS} -o ${NAME}
 
 clean: 
 			${RM} ${OBJS}
