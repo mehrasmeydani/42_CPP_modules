@@ -10,10 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC			= Bureaucrat.cpp Form.cpp main.cpp
+SRC			= Bureaucrat.cpp AForm.cpp main.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 SRCS		= ${addprefix ${PRE_SRC}, ${SRC}}
 PRE_SRC		= srcs/
-HEAD		= Bureaucrat.hpp Form.hpp
+HEAD		= Bureaucrat.hpp AForm.hpp ShrubberyCreationForm.hpp RobotomyRequestForm.hpp PresidentialPardonForm.hpp
 HEADS		= ${addprefix ${PRE_HEAD}, ${HEAD}}
 PRE_HEAD	= header/
 NAME		= TryCatch

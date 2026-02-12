@@ -2,12 +2,21 @@
 #include "../header/AForm.hpp"
 #include <iostream>
 
-void	Bureaucrat::signForm(AForm &AForm) {
+void	Bureaucrat::executeForm(const AForm& form) const{
 	try {
-		AForm.beSigned(*this);
-		std::cout << getName() << " signed " << AForm.getName() << " succesfully!"<< std::endl;
-	} catch (AForm::GradeTooLowException &e) {
-		std::cout << getName() << " couldn't sign " << AForm.getName() << " because " << e.what() << std::endl;
+		form.execute(*this);
+		std::cout << getName() << " executed " << form.getName() << " succesfully!"<< std::endl;
+	} catch (const std::exception& e) {
+		std::cerr << getName() << " couldn't execute " << form.getName() << " because " << e.what() << std::endl;
+	}
+}
+
+void	Bureaucrat::signForm(AForm &form) {
+	try {
+		form.beSigned(*this);
+		std::cout << getName() << " signed " << form.getName() << " succesfully!"<< std::endl;
+	} catch (const std::exception &e) {
+		std::cout << getName() << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
 	}
 }
 

@@ -42,6 +42,10 @@ const char* AForm::GradeTooHighException::what(void) const throw() {
 	return "Grade Too High";
 }
 
+const char* AForm::FormNotSigned::what(void) const throw(){
+	return "Not signed";
+}
+
 AForm::AForm() : name("Random AForm"), Signed(0), signPermission(75), execPermission(20) , target("Random Target") {
 }
 
@@ -66,4 +70,7 @@ std::ostream& operator<<(std::ostream& os, const AForm& in) {
 		os << "NOT";
 	os << " been Signed!" << std::endl;
 	return os;
+}
+
+AForm::~AForm() {
 }
