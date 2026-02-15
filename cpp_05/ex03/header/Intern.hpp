@@ -2,7 +2,6 @@
 
 #include "AForm.hpp"
 #include <exception>
-#include <iostream>
 
 class Intern {
 	public:

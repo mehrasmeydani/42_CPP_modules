@@ -2,7 +2,7 @@
 #include "../header/ShrubberyCreationForm.hpp"
 #include "../header/RobotomyRequestForm.hpp"
 #include "../header/PresidentialPardonForm.hpp"
-#include <ostream>
+#include <iostream>
 
 AForm *Intern::makeForm(const std::string formName, const std::string target) {
 	std::string forms[3] = {
