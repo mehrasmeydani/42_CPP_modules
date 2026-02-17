@@ -6,6 +6,86 @@
 #include "../header/Intern.hpp"
 #include <iostream>
 #include <cstdlib>
+/*
+int main() {
+	try {
+		std::cout << "\n========== CREATE RANDOM INTERN =================================\n";
+		Intern ransom;
+
+		std::cout << "\n========== TRY MAKEFORM() FOR ROBOTOMY REQUEST ==================\n";
+		try {
+			AForm* rrf = ransom.makeForm("Robotomy Request", "Robot");
+			std::cout << "\n";
+			std::cout << *rrf << "\n";
+			delete rrf;
+		} catch (const std::exception& e) {
+			std::cerr << "Exception caught: " << e.what();
+		}
+
+		std::cout << "\n========== TRY WRONG ROBOTOMY REQUEST ===========================\n";
+		try {
+			AForm* rrf = ransom.makeForm("wrong Robotomy Request", "Robot");
+			std::cout << "\n";
+			std::cout << *rrf << "\n";
+			delete rrf;
+		} catch (const std::exception& e) {
+			std::cerr << "Exception caught: " << e.what();
+		}
+
+		std::cout << "\n========== TRY MAKEFORM() FOR PRESIDENTIAL PARDON ===============\n";
+		try {
+			AForm* ppf = ransom.makeForm("Presidential Pardon", "President");
+			std::cout << "\n";
+			std::cout << *ppf << "\n";
+			delete ppf;
+		} catch (const std::exception& e) {
+			std::cerr << "Exception caught: " << e.what();
+		}
+
+		std::cout << "\n========== TRY WRONG PRESIDENTIAL PARDON ========================\n";
+		try {
+			AForm* ppf = ransom.makeForm("wrong Presidential Pardon", "President");
+			std::cout << "\n";
+			std::cout << *ppf << "\n";
+			delete ppf;
+		} catch (const std::exception& e) {
+			std::cerr << "Exception caught: " << e.what();
+		}
+
+		std::cout << "\n========== TRY MAKEFORM() FOR SHRUBBERY CREATION ================\n";
+		try {
+			AForm* scf = ransom.makeForm("Shrubbery Creation", "Shrub");
+			std::cout << "\n";
+			std::cout << *scf << "\n";
+			delete scf;
+		} catch (const std::exception& e) {
+			std::cerr << "Exception caught: " << e.what();
+		}
+
+		std::cout << "\n========== TRY WRONG SHRUBBERY CREATION =========================\n";
+		try {
+			AForm* scf = ransom.makeForm("wrong Shrubbery Creation", "Shrub");
+			std::cout << "\n";
+			std::cout << *scf << "\n";
+			delete scf;
+		} catch (const std::exception& e) {
+			std::cerr << "Exception caught: " << e.what();
+		}
+
+		std::cout << "\n========== TRY MAKEFORM() FOR NONEXISTENT FORM ==================\n";
+		try {
+			AForm* inv = ransom.makeForm("nonexistent form", "Unknown");
+			delete inv;
+		} catch (const std::exception& e) {
+			std::cerr << "Exception caught: " << e.what() << "\n";
+		}
+
+	} catch (const std::exception& e) {
+		std::cerr << "Exception caught: " << e.what();
+	}
+	return 0;
+}*/
+
 
 void testFormExecution(Bureaucrat& bureaucrat, AForm& form) {
 	try {

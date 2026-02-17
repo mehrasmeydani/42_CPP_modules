@@ -17,6 +17,7 @@ AForm *Intern::makeForm(const std::string formName, const std::string target) {
 		if (forms[i] == formName)
 			return (std::cout << "Intern creates " << formName << std::endl, (this->*formFunction[i])(target));
 	std::cerr << "This intern could not find the requested form \"" << formName << "\" and now has to work overtime and it's your fault\n";
+	//throw Intern::WrongFromException();
 	return NULL;
 }
 
