@@ -19,7 +19,7 @@ HEAD		= Bureaucrat.hpp AForm.hpp ShrubberyCreationForm.hpp RobotomyRequestForm.h
 HEADS		= ${addprefix ${PRE_HEAD}, ${HEAD}}
 PRE_HEAD	= header/
 NAME		= TryCatch
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -fsanitize=address,leak,undefined
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -fsanitize=address,leak,undefined -g
 OBJ			= ${SRC:.cpp=.o}
 PRE_OBJ		= obj/
 OBJS		= ${addprefix ${PRE_OBJ}, ${OBJ}}

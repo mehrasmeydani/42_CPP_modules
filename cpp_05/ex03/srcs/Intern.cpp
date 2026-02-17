@@ -6,22 +6,18 @@
 
 AForm *Intern::makeForm(const std::string formName, const std::string target) {
 	std::string forms[3] = {
-		"ShrubberyCreationForm",
-		"RobotomyRequestForm",
-		"PresidentialPardonForm"};
+		"Shrubbery Creation",
+		"Robotomy Request",
+		"Presidential Pardon"};
 	AForm* (Intern::*formFunction[3])(const std::string) = {
 		&Intern::makeShrubberyCreationForm,
 		&Intern::makeRobotomyRequestForm,
 		&Intern::makePresidentialPardonForm};
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 	for (int i = 0; i < 3; i++)
 		if (forms[i] == formName)
-			return (std::cout << "intern creates" << formName << std::endl, (this->*formFunction[i])(target));
-#pragma GCC diagnostic pop
+			return (std::cout << "Intern creates " << formName << std::endl, (this->*formFunction[i])(target));
 	std::cerr << "This intern could not find the requested form \"" << formName << "\" and now has to work overtime and it's your fault\n";
-	throw Intern::WrongFromException();
+	return NULL;
 }
 
 const char* Intern::WrongFromException::what(void) const throw() {
