@@ -53,7 +53,7 @@ class Array {
 			return *this;
 		}
 
-		class InvalidIndex : std::exception {
+		class InvalidIndex : public std::exception {
 			public:
 				virtual const char * what() const throw() {
 					return "Invalid Index";

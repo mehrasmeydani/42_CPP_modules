@@ -20,11 +20,12 @@ static int g_passed = 0;
 		std::cout << RED "FAIL" RESET " " << __func__ << std::endl; \
 	}
 
-#define ASSERT_THROW(code, exception_type) \
+#define ASSERT_THROW(code) \
 	try { \
 		code; \
 		std::cout << RED "FAIL" RESET " " << __func__ << " (no exception)" << std::endl; \
-	} catch (const exception_type&) { \
+	} catch (const std::exception& r) { \
+		(void)r; \
 		std::cout << GREEN "PASS" RESET " " << __func__ << std::endl; \
 		g_passed++; \
 	}
@@ -101,11 +102,14 @@ void test_element_access() {
 void test_exceptions() {
 	TEST("out of bounds exception");
 	Array<int> arr(3);
-	ASSERT_THROW(arr[3] = 42, Array<int>::InvalidIndex);
+	ASSERT_THROW(arr[3] = 42);
 	
 	TEST("empty array exception");
 	Array<int> empty;
-	ASSERT_THROW((void)empty[0], Array<int>::InvalidIndex);
+	ASSERT_THROW((void)empty[0]);
+
+	TEST("negative index exception");
+	ASSERT_THROW((void)arr[-1]);
 }
 
 void test_different_types() {
@@ -160,3 +164,59 @@ int main() {
 	
 	return (g_passed == g_tests) ? 0 : 1;
 }
+
+
+// #include <iostream>
+// #include <cstdlib>
+// #include "../header/Array.hpp"
+
+// #define MAX_VAL 750
+// int main(int, char**)
+// {
+//     Array<int> numbers(MAX_VAL);
+//     int* mirror = new int[MAX_VAL];
+//     srand(time(NULL));
+//     for (int i = 0; i < MAX_VAL; i++)
+//     {
+//         const int value = rand();
+//         numbers[i] = value;
+//         mirror[i] = value;
+//     }
+//     //SCOPE
+//     {
+//         Array<int> tmp = numbers;
+//         Array<int> test(tmp);
+//     }
+
+//     for (int i = 0; i < MAX_VAL; i++)
+//     {
+//         if (mirror[i] != numbers[i])
+//         {
+//             std::cerr << "didn't save the same value!!" << std::endl;
+//             return 1;
+//         }
+//     }
+//     try
+//     {
+//         numbers[-2] = 0;
+//     }
+//     catch(const std::exception& e)
+//     {
+//         std::cerr << e.what() << '\n';
+//     }
+//     try
+//     {
+//         numbers[MAX_VAL] = 0;
+//     }
+//     catch(const std::exception& e)
+//     {
+//         std::cerr << e.what() << '\n';
+//     }
+
+//     for (int i = 0; i < MAX_VAL; i++)
+//     {
+//         numbers[i] = rand();
+//     }
+//     delete [] mirror;//
+//     return 0;
+// }

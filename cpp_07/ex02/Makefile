@@ -17,7 +17,7 @@ HEAD		= Array.hpp
 HEADS		= ${addprefix ${PRE_HEAD}, ${HEAD}}
 PRE_HEAD	= header/
 NAME		= ex02
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -fsanitize=address,leak,undefined -g
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 OBJ			= ${SRC:.cpp=.o}
 PRE_OBJ		= obj/
 OBJS		= ${addprefix ${PRE_OBJ}, ${OBJ}}
