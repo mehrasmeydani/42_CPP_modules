@@ -36,9 +36,10 @@ EOL
 
 $capClass::$capClass(void) {}
 
-$capClass::$capClass(const $capClass& in) {}
+$capClass::$capClass(const $capClass& in) {(void)in;}
 
 $capClass &$capClass::operator=(const $capClass& in) {
+	(void)in;
 	return (*this);
 }
 
