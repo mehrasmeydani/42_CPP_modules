@@ -16,8 +16,6 @@ do
 	cat > $hpp << EOL
 #pragma once
 
-#include <iostream>
-
 class $capClass {
 	public:
 		$capClass(void);
