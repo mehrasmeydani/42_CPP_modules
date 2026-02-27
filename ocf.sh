@@ -1,7 +1,7 @@
 #!/bin/bash
 
-hppPath="./"
-cppPath="./"
+hppPath="./header/"
+cppPath="./srcs/"
 
 mkdir -p $hppPath $cppPath
 
