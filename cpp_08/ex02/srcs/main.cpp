@@ -105,40 +105,6 @@ void test_const_iterator() {
 	ASSERT(sum == 60);
 }
 
-void test_reverse_iterator() {
-	TEST("reverse_iterator");
-	MutantStack<int> mstack;
-	mstack.push(1);
-	mstack.push(2);
-	mstack.push(3);
-
-	int expected[] = {3, 2, 1};
-	int i = 0;
-	bool ok = true;
-	for (MutantStack<int>::reverse_iterator it = mstack.rbegin(); it != mstack.rend(); ++it) {
-		if (*it != expected[i])
-			ok = false;
-		i++;
-	}
-	ASSERT(ok && i == 3);
-}
-
-void test_const_reverse_iterator() {
-	TEST("const_reverse_iterator");
-	MutantStack<int> mstack;
-	mstack.push(5);
-	mstack.push(10);
-	mstack.push(15);
-
-	const MutantStack<int>& cref = mstack;
-	int sum = 0;
-	int count = 0;
-	for (MutantStack<int>::const_reverse_iterator it = cref.rbegin(); it != cref.rend(); ++it) {
-		sum += *it;
-		count++;
-	}
-	ASSERT(sum == 30 && count == 3);
-}
 
 void test_iterator_modify() {
 	TEST("modify through iterator");
@@ -351,8 +317,6 @@ int main() {
 	std::cout << "\n--- Iterator Tests ---\n";
 	test_begin_end();
 	test_const_iterator();
-	test_reverse_iterator();
-	test_const_reverse_iterator();
 	test_iterator_modify();
 	test_empty_stack_iterators();
 

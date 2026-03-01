@@ -4,35 +4,19 @@
 template <typename T>
 class MutantStack : public std::stack<T> {
 	public:
-		// Iterator typedefs - accessing the underlying container's iterators
-		typedef typename std::stack<T>::container_type::iterator iterator;
-		typedef typename std::stack<T>::container_type::const_iterator const_iterator;
-		typedef typename std::stack<T>::container_type::reverse_iterator reverse_iterator;
-		typedef typename std::stack<T>::container_type::const_reverse_iterator const_reverse_iterator;
-
 		MutantStack() {}
-		
-		// Fixed copy constructor - actually copies the stack
-		MutantStack(const MutantStack& other) : std::stack<T>(other) {}
-		
-		// Fixed assignment operator - actually assigns the stack
-		MutantStack& operator=(const MutantStack& other) {
-			if (this != &other) {
-				std::stack<T>::operator=(other);
-			}
+		MutantStack(const MutantStack& in) : std::stack<T>(in) {}
+		MutantStack& operator=(const MutantStack& in) {
+			if (&in != this)
+				std::stack<T>::operator=(in);
 			return *this;
 		}
-		
 		~MutantStack() {}
+		typedef typename std::deque<T>::iterator iterator;
+		typedef typename std::deque<T>::const_iterator const_iterator;
 
-		// Iterator methods to access underlying container
-		iterator begin() { return this->c.begin(); }
-		iterator end() { return this->c.end(); }
-		const_iterator begin() const { return this->c.begin(); }
-		const_iterator end() const { return this->c.end(); }
-		
-		reverse_iterator rbegin() { return this->c.rbegin(); }
-		reverse_iterator rend() { return this->c.rend(); }
-		const_reverse_iterator rbegin() const { return this->c.rbegin(); }
-		const_reverse_iterator rend() const { return this->c.rend(); }
+		iterator begin() {return (this->c.begin());}
+		iterator end() {return (this->c.end());}
+		const_iterator begin() const {return (this->c.begin());}
+		const_iterator end() const {return (this->c.end());}
 };
