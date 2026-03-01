@@ -10,13 +10,13 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC			= main.cpp Span.cpp
+SRC			= main.cpp
 SRCS		= ${addprefix ${PRE_SRC}, ${SRC}}
 PRE_SRC		= srcs/
-HEAD		= Span.hpp
+HEAD		= MutantStack.hpp
 HEADS		= ${addprefix ${PRE_HEAD}, ${HEAD}}
 PRE_HEAD	= header/
-NAME		= easyfind
+NAME		= mutent
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -fsanitize=address,leak,undefined -g
 OBJ			= ${SRC:.cpp=.o}
 PRE_OBJ		= obj/
