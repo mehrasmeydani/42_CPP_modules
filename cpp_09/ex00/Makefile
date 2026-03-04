@@ -10,13 +10,13 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC			= main.cpp
+SRC			= main.cpp BitcoinExchange.cpp
 SRCS		= ${addprefix ${PRE_SRC}, ${SRC}}
 PRE_SRC		= srcs/
-HEAD		= MutantStack.hpp
+HEAD		= BitcoinExchange.hpp
 HEADS		= ${addprefix ${PRE_HEAD}, ${HEAD}}
 PRE_HEAD	= header/
-NAME		= mutent
+NAME		= btc
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -fsanitize=address,leak,undefined -g
 OBJ			= ${SRC:.cpp=.o}
 PRE_OBJ		= obj/
