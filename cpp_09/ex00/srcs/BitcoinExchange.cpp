@@ -64,7 +64,6 @@ void check_frac(const std::string& in) {
 	}
 }
 
-
 void	BitcoinExchange::set_map(std::ifstream& data_base) {
 	std::string buffer;
 	int			date;
@@ -76,10 +75,12 @@ void	BitcoinExchange::set_map(std::ifstream& data_base) {
 		throw std::runtime_error("Invalid First Line");
 	while (std::getline(data_base, buffer))
 	{
+		if (buffer.length() < 14)
+			throw std::runtime_error("Invalid list format");
 		try {
-			date = get_date(buffer);
 			if (buffer.substr(10, 3) != " | ")
 				throw std::runtime_error("Invalid list format");
+			date = get_date(buffer);
 			check_frac(buffer.substr(13));
 			errno = 0;
 			value = std::strtod(buffer.substr(13).c_str(), NULL);
@@ -88,6 +89,38 @@ void	BitcoinExchange::set_map(std::ifstream& data_base) {
 			this->btc[date] =  value;
 		} catch (const std::exception &e) {
 			throw std::runtime_error(e.what());
+		}
+	}
+}
+
+void	BitcoinExchange::print_data(std::ifstream& input) const {
+	std::string buffer;
+	int			date;
+	double		value;
+	std::getline(input, buffer);
+	if (input.eof())
+		throw std::runtime_error("Data Base empty");
+	if (buffer.compare("date | value"))
+		throw std::runtime_error("Invalid First Line");
+	while (std::getline(input, buffer))
+	{
+		try {
+			if (buffer.substr(10, 3) != " | ")
+				throw std::runtime_error("Invalid list format");
+			date = get_date(buffer);
+			check_frac(buffer.substr(13));
+			errno = 0;
+			value = std::strtod(buffer.substr(13).c_str(), NULL);
+			if (errno != 0)
+				throw std::runtime_error(std::strerror(errno));
+			std::map<int, double>::const_iterator it = this->btc.begin();
+			while (it != btc.end() && it->first < date)
+				it++;
+			if (it == btc.end() ||  it->first != date)
+				it--;
+			std::cout << it->first / 10000  << "-" << it->first % 10000 / 100 << "-" << it->first % 100 << " | " << value * it->second << std::endl;
+		} catch (const std::exception &e) {
+			std::cerr << "Error: " << e.what() << std::endl;
 		}
 	}
 }
