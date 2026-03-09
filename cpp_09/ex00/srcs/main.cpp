@@ -27,6 +27,7 @@ int main(int argc, char **argv) {
 		print_error(e.what());
 		return (1);
 	}
+	std::cout << "here\n";
 	input_file = argv[1];
 	if (input_file.rfind(".csv", input_file.npos) != input_file.size() - 4 && input_file.size() != 4)
 	{
@@ -39,4 +40,5 @@ int main(int argc, char **argv) {
 		print_error("Cannot open input file");
 		return(1);
 	}
+	
 }
