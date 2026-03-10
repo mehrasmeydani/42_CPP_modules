@@ -6,14 +6,13 @@
 #include <cstdlib>
 #include <cerrno>
 #include <cstring>
+#include <climits>
 
 void	check_date_format(const std::string &date) {
 	for (int i = 0; date[i]; i++) {
 		if ((i < 4 || (i > 4 && i < 7) || (i > 7 && i < 10)) && (date[i] > '9' || date[i] < '0'))
 			throw std::runtime_error("Invalid Date Format");
 		else if ((i == 4 || i == 7) && date[i] != '-')
-			throw std::runtime_error("Invalid Date Format");
-		else if (i == 10 && date[i] != ' ')
 			throw std::runtime_error("Invalid Date Format");
 	}
 }
@@ -29,7 +28,7 @@ int	get_date(const std::string& in) {
 	char		*end;
 
 	try {
-		check_date_format(in.substr(0, 11));
+		check_date_format(in.substr(0, 10));
 		date = std::strtod(in.substr(0, 4).c_str(), &end);
 		if (date < 1900)
 			throw std::runtime_error("Invalid Date");
@@ -71,19 +70,17 @@ void	BitcoinExchange::set_map(std::ifstream& data_base) {
 	std::getline(data_base, buffer);
 	if (data_base.eof())
 		throw std::runtime_error("Data Base empty");
-	if (buffer.compare("date | value"))
+	if (buffer.compare("date,exchange_rate"))
 		throw std::runtime_error("Invalid First Line");
 	while (std::getline(data_base, buffer))
 	{
-		if (buffer.length() < 14)
-			throw std::runtime_error("Invalid list format");
 		try {
-			if (buffer.substr(10, 3) != " | ")
+			if (buffer[10] != ',')
 				throw std::runtime_error("Invalid list format");
 			date = get_date(buffer);
-			check_frac(buffer.substr(13));
+			check_frac(buffer.substr(11));
 			errno = 0;
-			value = std::strtod(buffer.substr(13).c_str(), NULL);
+			value = std::strtod(buffer.substr(11).c_str(), NULL);
 			if (errno != 0)
 				throw std::runtime_error(std::strerror(errno));
 			this->btc[date] =  value;
@@ -113,12 +110,14 @@ void	BitcoinExchange::print_data(std::ifstream& input) const {
 			value = std::strtod(buffer.substr(13).c_str(), NULL);
 			if (errno != 0)
 				throw std::runtime_error(std::strerror(errno));
+			if (value > INT_MAX)
+				throw std::runtime_error("Too large value");
 			std::map<int, double>::const_iterator it = this->btc.begin();
 			while (it != btc.end() && it->first < date)
 				it++;
 			if (it == btc.end() ||  it->first != date)
 				it--;
-			std::cout << it->first / 10000  << "-" << it->first % 10000 / 100 << "-" << it->first % 100 << " | " << value * it->second << std::endl;
+			std::cout << it->first / 10000  << "-" << it->first % 10000 / 100 << "-" << it->first % 100 << " => " << value << " = " << value * it->second << std::endl;
 		} catch (const std::exception &e) {
 			std::cerr << "Error: " << e.what() << std::endl;
 		}
