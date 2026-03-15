@@ -19,7 +19,7 @@ class PmergeMe {
 	public:
 		void	get_n_comparison() const;
 		void	increase_n_comparison();
-		void	set_n_comparison();
+		void	reset_n_comparison();
 		template<typename T>
 		void	merge_insert_sort(T& container, int bucket_size);
 		PmergeMe(void);

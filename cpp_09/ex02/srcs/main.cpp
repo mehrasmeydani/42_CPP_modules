@@ -1,6 +1,7 @@
 #include "../header/PmergeMe.hpp"
 
 #include <cstdlib>
+#include <iostream>
 #include <vector>
 
 int main(int argc, char ** argv)
@@ -15,6 +16,8 @@ int main(int argc, char ** argv)
 		vec.push_back(strtod(argv[i], NULL));
 	}
 	me.merge_insert_sort(vec, 1);
+	me.get_n_comparison();
+	me.reset_n_comparison();
 	//for (std::vector<unsigned int>::iterator it = vec.begin(); it != vec.end(); it ++) {
 	//	std::cout << *it << " ";
 	//}

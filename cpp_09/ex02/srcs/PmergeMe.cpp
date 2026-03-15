@@ -120,7 +120,7 @@ void	PmergeMe::increase_n_comparison()
 	this->n_comparison++;
 }
 
-void	PmergeMe::set_n_comparison()
+void	PmergeMe::reset_n_comparison()
 {
 	this->n_comparison = 0;
 }
