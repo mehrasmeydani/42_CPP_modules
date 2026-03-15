@@ -1,8 +1,6 @@
 #include "../header/PmergeMe.hpp"
-#include <cstddef>
+
 #include <cstdlib>
-#include <iostream>
-#include <ostream>
 #include <vector>
 
 int main(int argc, char ** argv)
