@@ -87,6 +87,7 @@ void	PmergeMe::merge_insert_sort(T& container, int bucket_size){
 		else
 			pend.insert(pend.end(), insert, insert + bucket_size);
 	}
+
 	std::cout << "\noriginal: ";
 	print_merge_level(container, bucket_size, n_buckets);
 	std::cout << "main:     ";
