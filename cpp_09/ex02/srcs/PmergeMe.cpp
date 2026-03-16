@@ -63,7 +63,7 @@ void	PmergeMe::insert(T& container, T& main, T& pend, int bucket_size) {
 	typename T::iterator low_bound = main.begin() + bucket_size - 1;
 	typename T::iterator up_bound = main.begin() + bucket_size * jackobs_curr - 1;
 	typename T::iterator mid_bound = low_bound + (up_bound - low_bound) / 2;
-	//typename T::iterator insert_element = (jackobs_diff - insereted) * bucket_size + pend.begin();
+	//typename T::iterator insert_element = (jackobs_diff - insereted) * bucket_size + pend.begin(); // calculator reverse jackob_diff reverse element
 	
 	(void)pend;(void)jackobs_diff;(void)container;
 	std::cout << "\nlow_bound: " << *low_bound << "\nup_bound: "<< *up_bound << "\nmid_bound: "<< *mid_bound << std::endl;
@@ -113,6 +113,7 @@ void	PmergeMe::merge_insert_sort(T& container, int bucket_size){
 	print_merge_level(pend, bucket_size, n_buckets);
 
 	insert(container, main, pend, bucket_size);
+	//insert odd one out
 
 }
 
