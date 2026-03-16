@@ -15,6 +15,8 @@ class PmergeMe {
 
 		template<typename T>
 		void	print_merge_level(T& container, int bucket_size, int n_buckets);
+		template<typename T>
+		void	insert(T& container, T& main, T& pend, int bucket_size);
 
 	public:
 		void	get_n_comparison() const;

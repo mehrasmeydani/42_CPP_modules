@@ -54,8 +54,23 @@ void	PmergeMe::print_merge_level(T& container, int bucket_size, int n_buckets) {
 }
 
 template<typename T>
-void	PmergeMe::merge(T& container, int bucket_size, int n_buckets)
-{
+void	PmergeMe::insert(T& container, T& main, T& pend, int bucket_size) {
+	//int insereted = 0;
+	int	jackobs_prev = 1;
+	int	jackobs_curr = 3;
+	int jackobs_diff = jackobs_curr - jackobs_prev;
+	//int	pend_size = pend.size();
+	typename T::iterator low_bound = main.begin() + bucket_size - 1;
+	typename T::iterator up_bound = main.begin() + bucket_size * jackobs_curr - 1;
+	typename T::iterator mid_bound = low_bound + (up_bound - low_bound) / 2;
+	//typename T::iterator insert_element = (jackobs_diff - insereted) * bucket_size + pend.begin();
+	
+	(void)pend;(void)jackobs_diff;(void)container;
+	std::cout << "\nlow_bound: " << *low_bound << "\nup_bound: "<< *up_bound << "\nmid_bound: "<< *mid_bound << std::endl;
+}
+
+template<typename T>
+void	PmergeMe::merge(T& container, int bucket_size, int n_buckets) {
 	typename T::iterator	a_node = container.begin() + bucket_size - 1;
 	typename T::iterator	b_node = a_node + bucket_size;
 	for (int i = 0; i < n_buckets / 2; i++) {
@@ -80,9 +95,9 @@ void	PmergeMe::merge_insert_sort(T& container, int bucket_size){
 	T main;
 	T pend;
 	main.insert(main.end(), container.begin(), container.begin() + bucket_size);
-	for (int i = 1; i < n_buckets; i++) {
+	for (int i = 1; i < n_buckets / 2 * 2; i++) {
 		typename T::iterator insert = container.begin() + i * bucket_size;
-		if (i % 2 && !(n_buckets % 2 && i == n_buckets - 1))
+		if (i % 2)
 			main.insert(main.end(), insert, insert + bucket_size);
 		else
 			pend.insert(pend.end(), insert, insert + bucket_size);
@@ -93,10 +108,11 @@ void	PmergeMe::merge_insert_sort(T& container, int bucket_size){
 	std::cout << "main:     ";
 	print_merge_level(main, bucket_size, n_buckets);
 	std::cout << "pend: ";
-	for (int i = 0; i < bucket_size * 6 + 8; ++i) {
+	for (int i = 0; i < bucket_size * 6 + 8; ++i)
 		std::cout << " ";
-	}
 	print_merge_level(pend, bucket_size, n_buckets);
+
+	insert(container, main, pend, bucket_size);
 
 }
 
