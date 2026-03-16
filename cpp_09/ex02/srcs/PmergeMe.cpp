@@ -66,18 +66,41 @@ void	PmergeMe::insert(T& container, T& main, T& pend, int bucket_size) {
 		typename T::iterator up_bound = main.begin() + bucket_size * jackobs_curr - 1;
 		typename T::iterator mid_bound = low_bound + (up_bound - low_bound) / 2;
 		int	chosen_element = jackobs_diff + insereted - inseterted_this_diff;
+		
+		//std::cout << chosen_element << " " << pend_size << std::endl;
+		
 		if (chosen_element > pend_size)
-		{
 			chosen_element = pend_size;
-			std::cout << "wowo\n";
+		typename T::iterator insert_element = (chosen_element) * bucket_size + pend.begin() - 1; // calculator reverse jackob_diff reverse element
+		while (low_bound < up_bound)
+		{
+			if (compare<T>(mid_bound, insert_element))
+				up_bound = mid_bound - bucket_size;
+			else
+				low_bound = mid_bound + bucket_size;
+			mid_bound = low_bound + (up_bound - low_bound) / 2;
 		}
-		typename T::iterator insert_element = (pend_size) * bucket_size + pend.begin() - 1; // calculator reverse jackob_diff reverse element
 		std::cout << "\nlow_bound: " << *low_bound << "\nup_bound: "<< *up_bound << "\nmid_bound: "<< *mid_bound << "\nchosen: " << *insert_element << std::endl;
-		insereted ++;
+		typename T::iterator insert_pos;
+		if (compare<T>(low_bound, insert_element))
+			insert_pos = low_bound - (bucket_size - 1);
+		else
+			insert_pos = low_bound + 1;
+		main.insert(insert_pos, insert_element - (bucket_size - 1), insert_element + 1);
+		if (inseterted_this_diff == jackobs_diff)
+		{
+			int next = jackobs_curr + 2 * jackobs_prev;
+			jackobs_prev = jackobs_curr;
+			jackobs_curr = next;
+			jackobs_diff = jackobs_curr - jackobs_prev;
+			inseterted_this_diff = 0;
+		}
 		inseterted_this_diff++;
+		insereted ++;
 	}
 	
-	(void)pend;(void)jackobs_diff;(void)container;
+	container = main;
+	(void)pend;(void)jackobs_diff;
 }
 
 template<typename T>
