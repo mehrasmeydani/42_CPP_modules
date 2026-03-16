@@ -55,18 +55,29 @@ void	PmergeMe::print_merge_level(T& container, int bucket_size, int n_buckets) {
 
 template<typename T>
 void	PmergeMe::insert(T& container, T& main, T& pend, int bucket_size) {
-	//int insereted = 0;
 	int	jackobs_prev = 1;
 	int	jackobs_curr = 3;
 	int jackobs_diff = jackobs_curr - jackobs_prev;
-	//int	pend_size = pend.size();
-	typename T::iterator low_bound = main.begin() + bucket_size - 1;
-	typename T::iterator up_bound = main.begin() + bucket_size * jackobs_curr - 1;
-	typename T::iterator mid_bound = low_bound + (up_bound - low_bound) / 2;
-	//typename T::iterator insert_element = (jackobs_diff - insereted) * bucket_size + pend.begin(); // calculator reverse jackob_diff reverse element
+	int insereted = 0;
+	int	pend_size = pend.size() / bucket_size;
+	int	inseterted_this_diff = 0;
+	while (insereted < pend_size) {
+		typename T::iterator low_bound = main.begin() + bucket_size - 1;
+		typename T::iterator up_bound = main.begin() + bucket_size * jackobs_curr - 1;
+		typename T::iterator mid_bound = low_bound + (up_bound - low_bound) / 2;
+		int	chosen_element = jackobs_diff + insereted - inseterted_this_diff;
+		if (chosen_element > pend_size)
+		{
+			chosen_element = pend_size;
+			std::cout << "wowo\n";
+		}
+		typename T::iterator insert_element = (pend_size) * bucket_size + pend.begin() - 1; // calculator reverse jackob_diff reverse element
+		std::cout << "\nlow_bound: " << *low_bound << "\nup_bound: "<< *up_bound << "\nmid_bound: "<< *mid_bound << "\nchosen: " << *insert_element << std::endl;
+		insereted ++;
+		inseterted_this_diff++;
+	}
 	
 	(void)pend;(void)jackobs_diff;(void)container;
-	std::cout << "\nlow_bound: " << *low_bound << "\nup_bound: "<< *up_bound << "\nmid_bound: "<< *mid_bound << std::endl;
 }
 
 template<typename T>
