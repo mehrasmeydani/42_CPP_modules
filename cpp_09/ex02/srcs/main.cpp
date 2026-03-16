@@ -18,8 +18,8 @@ int main(int argc, char ** argv)
 	me.merge_insert_sort(vec, 1);
 	me.get_n_comparison();
 	me.reset_n_comparison();
-	for (std::vector<unsigned int>::iterator it = vec.begin(); it != vec.end(); it ++) {
-		std::cout << *it << " ";
-	}
-	std::cout << std::endl;
+	// for (std::vector<unsigned int>::iterator it = vec.begin(); it != vec.end(); it ++) {
+	// 	std::cout << *it << " ";
+	// }
+	// std::cout << std::endl;
 }
