@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
+#include <ctime>
 
 int main(int argc, char ** argv)
 {
@@ -15,8 +16,18 @@ int main(int argc, char ** argv)
 	{
 		vec.push_back(strtod(argv[i], NULL));
 	}
+	for (std::vector<unsigned int>::iterator it = vec.begin(); it != vec.end(); it ++) {
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
+	// clock_t start = std::clock();
 	me.merge_insert_sort(vec, 1);
-	me.get_n_comparison();
+	// clock_t end = std::clock();
+
+	//double elapsed_us = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
+	//std::cout << "time " << elapsed_us << " us\n";
+
+	//me.get_n_comparison();
 	me.reset_n_comparison();
 	for (std::vector<unsigned int>::iterator it = vec.begin(); it != vec.end(); it ++) {
 		std::cout << *it << " ";

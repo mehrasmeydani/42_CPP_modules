@@ -1,0 +1,1 @@
+awk '{for(i=1;i<=NF;i++){x=$i+0;if(seen && x<prev){print "NOT_SORTED at token", n+1, ":", prev, "->", x; bad=1; exit} prev=x; seen=1; n++}} END{if(!bad){if(seen) print "SORTED", n, "numbers"; else print "EMPTY"}}' lol

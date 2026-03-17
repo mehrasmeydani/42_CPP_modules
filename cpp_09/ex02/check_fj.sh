@@ -43,6 +43,7 @@ for n in "${LENGTHS[@]}"; do
 	pass=0
 	fail=0
 	worst=0
+	best=100000
 	first_fail=""
 
 	for ((run = 1; run <= RUNS; run++)); do
@@ -90,6 +91,10 @@ for n in "${LENGTHS[@]}"; do
 			worst="$cmp"
 		fi
 
+		if (( cmp < best)); then
+			best="$cmp"
+		fi
+
 		if (( cmp <= max_cmp )); then
 			pass=$((pass + 1))
 		else
@@ -101,7 +106,7 @@ for n in "${LENGTHS[@]}"; do
 		fi
 	done
 
-	echo "n=$n max=$max_cmp pass=$pass fail=$fail worst_seen=$worst"
+	echo "n=$n max=$max_cmp pass=$pass fail=$fail worst_seen=$worst best_seen=$best"
 	if [[ -n "$first_fail" ]]; then
 		echo "  first_failure: $first_fail"
 	fi

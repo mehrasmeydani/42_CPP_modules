@@ -12,7 +12,6 @@ class PmergeMe {
 		void	merge(T& container, int bucket_size, int n_buckets);
 		template<typename T>
 		bool	compare(typename T::iterator &a, typename T::iterator &b);
-
 		template<typename T>
 		void	print_merge_level(T& container, int bucket_size, int n_buckets);
 		template<typename T>
