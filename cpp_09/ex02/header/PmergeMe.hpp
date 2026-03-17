@@ -2,6 +2,8 @@
 
 #include <algorithm>
 #include <iostream>
+#include <deque>
+#include <vector>
 
 class PmergeMe {
 	private:

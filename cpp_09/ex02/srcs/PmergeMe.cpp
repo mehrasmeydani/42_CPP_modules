@@ -88,12 +88,12 @@ void	PmergeMe::insert(T& container, T& main, T& pend, int bucket_size) {
 		int	insertion_bucket_index;
 		while (low_bound < up_bound)
 		{
+			mid = low_bound + (up_bound - low_bound) / 2;
 			mid_iter = bucket_end(main, bucket_size, mid);
 			if (compare<T>(mid_iter, insert_element))
 				up_bound = mid - 1;
 			else
 				low_bound = mid + 1;
-			mid = low_bound + (up_bound - low_bound) / 2;
 		}
 		mid = low_bound;
 		if (mid >= static_cast<int>(main.size() / bucket_size))
@@ -199,3 +199,4 @@ void	PmergeMe::reset_n_comparison()
 }
 
 template void	PmergeMe::merge_insert_sort<std::vector<unsigned int> >(std::vector<unsigned int>& container, int bucket_size);
+template void	PmergeMe::merge_insert_sort<std::deque<unsigned int> >(std::deque<unsigned int>& container, int bucket_size);
