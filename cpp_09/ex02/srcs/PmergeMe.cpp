@@ -164,13 +164,11 @@ void	PmergeMe::merge(T& container, int bucket_size, int n_buckets) {
 		std::cout << "\nmerge stage bucket_size=" << bucket_size << " n_buckets=" << n_buckets << std::endl;
 		print_merge_level(container, bucket_size, n_buckets);
 	}
-	typename T::iterator	a_node = container.begin() + bucket_size - 1;
-	typename T::iterator	b_node = a_node + bucket_size;
 	for (int i = 0; i < n_buckets / 2; i++) {
+		typename T::iterator	a_node = container.begin() + ((2 * i + 1) * bucket_size) - 1;
+		typename T::iterator	b_node = a_node + bucket_size;
 		if (compare<T>(a_node, b_node))
 			swap_buckets<T>(a_node, b_node, bucket_size);
-		a_node += (2 * bucket_size);
-		b_node = a_node + bucket_size;
 	}
 	if (VERBOSE)
 		print_merge_level(container, bucket_size, n_buckets);

@@ -5,7 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
 RUNS="${RUNS:-100}"
-LENGTHS_INPUT="${LENGTHS:-5 8 10 12 16 20 24 28 32 40}"
+LENGTHS_INPUT="${LENGTHS:-5 8 10 12 16 20 24 28 32 40 90 3000}"
 read -r -a LENGTHS <<< "$LENGTHS_INPUT"
 
 # Ford-Johnson worst-case comparisons:
@@ -80,7 +80,7 @@ for n in "${LENGTHS[@]}"; do
 			mapfile -t nums < <(shuf -i 1-"$((n * 20))" -n "$n")
 		fi
 
-		if ! out="$(./PmergeMe "${nums[@]}" 2>&1 | tr -d '\r')"; then
+		if ! out="$(./PmergeMe "${nums[@]}" | tr -d '\r')"; then
 			fail=$((fail + 1))
 			total_fail=$((total_fail + 1))
 			if [[ -z "$first_fail" ]]; then
