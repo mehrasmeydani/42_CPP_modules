@@ -29,6 +29,10 @@ ford_johnson_max() {
 	echo "$sum"
 }
 
+canonical_numbers() {
+	sed -E 's/[^0-9]+/ /g' | xargs
+}
+
 make >/dev/null
 
 total_fail=0
@@ -76,17 +80,65 @@ for n in "${LENGTHS[@]}"; do
 			mapfile -t nums < <(shuf -i 1-"$((n * 20))" -n "$n")
 		fi
 
-		out="$(./PmergeMe "${nums[@]}" | tail -n 1 | tr -d '\r')"
-		if [[ ! "$out" =~ ^[0-9]+$ ]]; then
+		if ! out="$(./PmergeMe "${nums[@]}" 2>&1 | tr -d '\r')"; then
 			fail=$((fail + 1))
 			total_fail=$((total_fail + 1))
 			if [[ -z "$first_fail" ]]; then
-				first_fail="run=$run invalid-output='$out'"
+				first_fail="run=$run execution-failed input=${nums[*]} output='$out'"
 			fi
 			continue
 		fi
 
-		cmp="$out"
+		input_line="$(echo "$out" | sed -n '1p')"
+		cmp_line="$(echo "$out" | sed -n '2p' | tr -d '[:space:]')"
+		vec_label="$(echo "$out" | sed -n '3p' | tr -d '[:space:]')"
+		vec_line="$(echo "$out" | sed -n '4p')"
+		deq_label="$(echo "$out" | sed -n '5p' | tr -d '[:space:]')"
+		deq_line="$(echo "$out" | sed -n '6p')"
+
+		expected_input="${nums[*]}"
+		expected_sorted="$(printf '%s\n' "${nums[@]}" | sort -n | paste -sd' ' -)"
+		printed_input="$(printf '%s\n' "$input_line" | canonical_numbers)"
+		vec_sorted="$(printf '%s\n' "$vec_line" | canonical_numbers)"
+		deq_sorted="$(printf '%s\n' "$deq_line" | canonical_numbers)"
+
+		if [[ "$vec_label" != "vec:" || "$deq_label" != "deq:" ]]; then
+			fail=$((fail + 1))
+			total_fail=$((total_fail + 1))
+			if [[ -z "$first_fail" ]]; then
+				first_fail="run=$run bad-format labels vec='$vec_label' deq='$deq_label' input=${nums[*]}"
+			fi
+			continue
+		fi
+
+		if [[ "$printed_input" != "$expected_input" ]]; then
+			fail=$((fail + 1))
+			total_fail=$((total_fail + 1))
+			if [[ -z "$first_fail" ]]; then
+				first_fail="run=$run bad-input-line got='$printed_input' want='$expected_input'"
+			fi
+			continue
+		fi
+
+		if [[ "$vec_sorted" != "$expected_sorted" || "$deq_sorted" != "$expected_sorted" ]]; then
+			fail=$((fail + 1))
+			total_fail=$((total_fail + 1))
+			if [[ -z "$first_fail" ]]; then
+				first_fail="run=$run unsorted vec='$vec_sorted' deq='$deq_sorted' want='$expected_sorted' input=${nums[*]}"
+			fi
+			continue
+		fi
+
+		if [[ ! "$cmp_line" =~ ^[0-9]+$ ]]; then
+			fail=$((fail + 1))
+			total_fail=$((total_fail + 1))
+			if [[ -z "$first_fail" ]]; then
+				first_fail="run=$run invalid-comparisons '$cmp_line' input=${nums[*]}"
+			fi
+			continue
+		fi
+
+		cmp="$cmp_line"
 		if (( cmp > worst )); then
 			worst="$cmp"
 		fi

@@ -17,7 +17,8 @@ HEAD		= PmergeMe.hpp
 HEADS		= ${addprefix ${PRE_HEAD}, ${HEAD}}
 PRE_HEAD	= header/
 NAME		= PmergeMe
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -fsanitize=address,leak,undefined -g
+VERBOSE		?= 0
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -fsanitize=address,leak,undefined -g -DVERBOSE=$(VERBOSE)
 OBJ			= ${SRC:.cpp=.o}
 PRE_OBJ		= obj/
 OBJS		= ${addprefix ${PRE_OBJ}, ${OBJ}}
@@ -41,6 +42,9 @@ fclean: 	clean
 			${RM} ${NAME} $(PRE_OBJ)
 
 re:			fclean all
+
+verbose:
+			$(MAKE) VERBOSE=1 re
 			
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean re verbose

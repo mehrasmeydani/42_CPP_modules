@@ -24,9 +24,10 @@ template<typename T>
 bool	PmergeMe::compare(typename T::iterator &bigger, typename T::iterator &smaller)
 {
 	this->increase_n_comparison();
-	if (*bigger > *smaller)
-		return true;
-	return false;
+	bool result = (*bigger > *smaller);
+	if (VERBOSE)
+		std::cout << "cmp[" << this->n_comparison << "]: " << *bigger << " > " << *smaller << " -> " << (result ? "true" : "false") << std::endl;
+	return result;
 }
 
 template <typename T>
@@ -86,14 +87,30 @@ void	PmergeMe::insert(T& container, T& main, T& pend, int bucket_size) {
 		typename T::iterator mid_iter;
 		typename T::iterator insert_element = bucket_end(pend, bucket_size, chosen_element - 1);
 		int	insertion_bucket_index;
+		if (VERBOSE)
+		{
+			std::cout << "\n[insert] step " << (inserted + inserted_this_diff + 1) << "/" << pend_size
+				<< " bucket_size=" << bucket_size
+				<< " value=" << *insert_element
+				<< " pair_bound=" << pair_bounds[chosen_element]
+				<< " range=[" << low_bound << "," << up_bound << "]" << std::endl;
+		}
 		while (low_bound < up_bound)
 		{
 			mid = low_bound + (up_bound - low_bound) / 2;
 			mid_iter = bucket_end(main, bucket_size, mid);
-			if (compare<T>(mid_iter, insert_element))
+			bool go_left = compare<T>(mid_iter, insert_element);
+			if (go_left)
 				up_bound = mid - 1;
 			else
 				low_bound = mid + 1;
+			if (VERBOSE)
+			{
+				std::cout << "  probe mid=" << mid
+					<< " mid_val=" << *mid_iter
+					<< " decision=" << (go_left ? "left" : "right")
+					<< " next_range=[" << low_bound << "," << up_bound << "]" << std::endl;
+			}
 		}
 		mid = low_bound;
 		if (mid >= static_cast<int>(main.size() / bucket_size))
@@ -112,8 +129,14 @@ void	PmergeMe::insert(T& container, T& main, T& pend, int bucket_size) {
 			insertion_bucket_index = mid + (insert_before_mid ? 0 : 1);
 			main.insert(mid_iter, insert_element - (bucket_size - 1), insert_element + 1);
 		}
-		for (int i = 1; i <= pend_size; ++i) {
-			if (pair_bounds[i] >= insertion_bucket_index)
+		if (VERBOSE)
+		{
+			std::cout << "  placed_at_bucket=" << insertion_bucket_index << std::endl;
+			std::cout << "  main_after: ";
+			print_merge_level(main, bucket_size, main.size() / bucket_size);
+		}
+		for (int i = 0; i <= pend_size; ++i) {
+			if (pair_bounds[i] + 1 >= insertion_bucket_index)
 				pair_bounds[i]++;
 		}
 		inserted_this_diff++;
@@ -136,6 +159,11 @@ void	PmergeMe::insert(T& container, T& main, T& pend, int bucket_size) {
 
 template<typename T>
 void	PmergeMe::merge(T& container, int bucket_size, int n_buckets) {
+	if (VERBOSE)
+	{
+		std::cout << "\nmerge stage bucket_size=" << bucket_size << " n_buckets=" << n_buckets << std::endl;
+		print_merge_level(container, bucket_size, n_buckets);
+	}
 	typename T::iterator	a_node = container.begin() + bucket_size - 1;
 	typename T::iterator	b_node = a_node + bucket_size;
 	for (int i = 0; i < n_buckets / 2; i++) {
@@ -144,6 +172,8 @@ void	PmergeMe::merge(T& container, int bucket_size, int n_buckets) {
 		a_node += (2 * bucket_size);
 		b_node = a_node + bucket_size;
 	}
+	if (VERBOSE)
+		print_merge_level(container, bucket_size, n_buckets);
 }
 
 template<typename T>
@@ -166,6 +196,14 @@ void	PmergeMe::merge_insert_sort(T& container, int bucket_size){
 			main.insert(main.end(), insert, insert + bucket_size);
 		else
 			pend.insert(pend.end(), insert, insert + bucket_size);
+	}
+	if (VERBOSE)
+	{
+		std::cout << "\ninsert stage bucket_size=" << bucket_size << std::endl;
+		std::cout << "main: ";
+		print_merge_level(main, bucket_size, main.size() / bucket_size);
+		std::cout << "pend: ";
+		print_merge_level(pend, bucket_size, pend.size() / bucket_size);
 	}
 
 	insert(container, main, pend, bucket_size);

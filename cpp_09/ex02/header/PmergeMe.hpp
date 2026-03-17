@@ -4,7 +4,9 @@
 #include <iostream>
 #include <deque>
 #include <vector>
-
+#ifndef VERBOSE
+#define	VERBOSE 0
+#endif
 class PmergeMe {
 	private:
 		PmergeMe(const PmergeMe& in);

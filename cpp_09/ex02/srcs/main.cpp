@@ -25,20 +25,21 @@ int main(int argc, char ** argv)
 	std::cout << std::endl;
 	// clock_t start = std::clock();
 	me.merge_insert_sort(vec, 1);
+	me.get_n_comparison();
+	me.reset_n_comparison();
 	me.merge_insert_sort(deq, 1);
 	// clock_t end = std::clock();
 
 	//double elapsed_us = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
 	//std::cout << "time " << elapsed_us << " us\n";
 
-	//me.get_n_comparison();
-	me.reset_n_comparison();
+	
 	std::cout << "vec: \n";
 	for (std::vector<unsigned int>::iterator it = vec.begin(); it != vec.end(); it ++) {
 		std::cout << *it << " ";
 	}
 	std::cout << "\ndeq: \n";
-	for (std::vector<unsigned int>::iterator it = vec.begin(); it != vec.end(); it ++) {
+	for (std::deque<unsigned int>::iterator it = deq.begin(); it != deq.end(); it ++) {
 		std::cout << *it << " ";
 	}
 	std::cout << std::endl;
