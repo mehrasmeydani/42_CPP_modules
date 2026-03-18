@@ -44,7 +44,6 @@ int main(int argc, char ** argv)
 	}
 	std::cout << std::endl;
 
-
 	clock_t start = std::clock();
 	me.merge_insert_sort(vec, 1);
 	clock_t end = std::clock();
@@ -52,15 +51,14 @@ int main(int argc, char ** argv)
 	std::cout << "vec: " << elapsed_us << " us\n";
 	me.get_n_comparison();
 
-
 	me.reset_n_comparison();
+
 	start = std::clock();
 	me.merge_insert_sort(deq, 1);
 	end = std::clock();
 	elapsed_us = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
 	std::cout << "deq: " << elapsed_us << " us\n";
 	me.get_n_comparison();
-	
 	
 	for (std::vector<unsigned int>::iterator it = vec.begin(); it != vec.end(); it ++) {
 		std::cout << *it << " ";
