@@ -22,7 +22,7 @@ int main(int argc, char ** argv)
 	for (int i = 1; i < argc; i++)
 	{
 		for (int j = 0 ; argv[i][j]; j++) {
-			if (argv[i][j] > '9' || argv[i][j] < '0')
+			if ((argv[i][j] > '9' || argv[i][j] < '0'))
 			{
 				std::cerr << "only positive integers are accepted as input\n";
 				return 1;
@@ -30,7 +30,7 @@ int main(int argc, char ** argv)
 		}
 		errno = 0;
 		double	num = strtod(argv[i], NULL);
-		if (num > INT_MAX || num < 0 || errno != 0)
+		if (num > INT_MAX || num < 0 || errno != 0 || !argv[i][0])
 		{
 			std::cerr << "only positive integers are accepted as input\n";
 			return 1;
