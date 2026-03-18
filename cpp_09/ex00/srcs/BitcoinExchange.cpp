@@ -115,7 +115,7 @@ void	BitcoinExchange::print_data(std::ifstream& input) const {
 			std::map<int, double>::const_iterator it = this->btc.begin();
 			while (it != btc.end() && it->first < date)
 				it++;
-			if (it == btc.end() ||  it->first != date)
+			if (it != btc.begin() && (it == btc.end() ||  it->first != date))
 				it--;
 			std::cout << it->first / 10000  << "-" << it->first % 10000 / 100 << "-" << it->first % 100 << " => " << value << " = " << value * it->second << std::endl;
 		} catch (const std::exception &e) {
