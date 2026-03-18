@@ -5,7 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
 RUNS="${RUNS:-100}"
-LENGTHS_INPUT="${LENGTHS:-5 8 10 12 16 20 24 28 32 40 90 3000}"
+LENGTHS_INPUT="${LENGTHS:-5 8 10 12 16 20 21 22 24 28 33 32 40 90 3000}"
 read -r -a LENGTHS <<< "$LENGTHS_INPUT"
 
 # Ford-Johnson worst-case comparisons:
@@ -90,23 +90,22 @@ for n in "${LENGTHS[@]}"; do
 		fi
 
 		input_line="$(echo "$out" | sed -n '1p')"
-		cmp_line="$(echo "$out" | sed -n '2p' | tr -d '[:space:]')"
-		vec_label="$(echo "$out" | sed -n '3p' | tr -d '[:space:]')"
-		vec_line="$(echo "$out" | sed -n '4p')"
-		deq_label="$(echo "$out" | sed -n '5p' | tr -d '[:space:]')"
-		deq_line="$(echo "$out" | sed -n '6p')"
+		vec_timing_line="$(echo "$out" | sed -n '2p' | tr -d '[:space:]')"
+		cmp_line1="$(echo "$out" | sed -n '3p' | tr -d '[:space:]')"
+		deq_timing_line="$(echo "$out" | sed -n '4p' | tr -d '[:space:]')"
+		cmp_line2="$(echo "$out" | sed -n '5p' | tr -d '[:space:]')"
+		vec_line="$(echo "$out" | sed -n '6p')"
 
 		expected_input="${nums[*]}"
 		expected_sorted="$(printf '%s\n' "${nums[@]}" | sort -n | paste -sd' ' -)"
 		printed_input="$(printf '%s\n' "$input_line" | canonical_numbers)"
 		vec_sorted="$(printf '%s\n' "$vec_line" | canonical_numbers)"
-		deq_sorted="$(printf '%s\n' "$deq_line" | canonical_numbers)"
 
-		if [[ "$vec_label" != "vec:" || "$deq_label" != "deq:" ]]; then
+		if [[ "$vec_timing_line" != vec:* || "$deq_timing_line" != deq:* ]]; then
 			fail=$((fail + 1))
 			total_fail=$((total_fail + 1))
 			if [[ -z "$first_fail" ]]; then
-				first_fail="run=$run bad-format labels vec='$vec_label' deq='$deq_label' input=${nums[*]}"
+				first_fail="run=$run bad-format labels vec='$vec_timing_line' deq='$deq_timing_line' input=${nums[*]}"
 			fi
 			continue
 		fi
@@ -120,25 +119,31 @@ for n in "${LENGTHS[@]}"; do
 			continue
 		fi
 
-		if [[ "$vec_sorted" != "$expected_sorted" || "$deq_sorted" != "$expected_sorted" ]]; then
+		if [[ "$vec_sorted" != "$expected_sorted" ]]; then
 			fail=$((fail + 1))
 			total_fail=$((total_fail + 1))
 			if [[ -z "$first_fail" ]]; then
-				first_fail="run=$run unsorted vec='$vec_sorted' deq='$deq_sorted' want='$expected_sorted' input=${nums[*]}"
+				first_fail="run=$run unsorted vec='$vec_sorted' want='$expected_sorted' input=${nums[*]}"
 			fi
 			continue
 		fi
 
-		if [[ ! "$cmp_line" =~ ^[0-9]+$ ]]; then
+		if [[ ! "$cmp_line1" =~ ^[0-9]+$ || ! "$cmp_line2" =~ ^[0-9]+$ ]]; then
 			fail=$((fail + 1))
 			total_fail=$((total_fail + 1))
 			if [[ -z "$first_fail" ]]; then
-				first_fail="run=$run invalid-comparisons '$cmp_line' input=${nums[*]}"
+				first_fail="run=$run invalid-comparisons vec='$cmp_line1' deq='$cmp_line2' input=${nums[*]}"
 			fi
 			continue
 		fi
 
-		cmp="$cmp_line"
+		cmp1="$cmp_line1"
+		cmp2="$cmp_line2"
+		cmp="$cmp1"
+		if (( cmp2 > cmp )); then
+			cmp="$cmp2"
+		fi
+
 		if (( cmp > worst )); then
 			worst="$cmp"
 		fi
@@ -147,13 +152,13 @@ for n in "${LENGTHS[@]}"; do
 			best="$cmp"
 		fi
 
-		if (( cmp <= max_cmp )); then
+		if (( cmp1 <= max_cmp && cmp2 <= max_cmp )); then
 			pass=$((pass + 1))
 		else
 			fail=$((fail + 1))
 			total_fail=$((total_fail + 1))
 			if [[ -z "$first_fail" ]]; then
-				first_fail="run=$run comparisons=$cmp max=$max_cmp input=${nums[*]}"
+				first_fail="run=$run vec_cmp=$cmp1 deq_cmp=$cmp2 max=$max_cmp input=${nums[*]}"
 			fi
 		fi
 	done

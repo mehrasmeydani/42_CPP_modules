@@ -113,6 +113,12 @@ void	PmergeMe::insert(T& container, T& main, T& pend, int bucket_size) {
 			}
 		}
 		mid = low_bound;
+		if (up_bound < 0)
+		{
+			insertion_bucket_index = 0;
+			main.insert(main.begin(), insert_element - (bucket_size - 1), insert_element + 1);
+		}
+		else
 		if (mid >= static_cast<int>(main.size() / bucket_size))
 		{
 			insertion_bucket_index = main.size() / bucket_size;
