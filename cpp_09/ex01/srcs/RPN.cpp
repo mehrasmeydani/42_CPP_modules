@@ -16,16 +16,20 @@ void	RPN::calc(std::istringstream &in) {
 			nums.pop();
 			switch (pos) {
 				case 0:
+					if (static_cast<double>(nums.top()) + static_cast<double>(tmp) > INT_MAX || static_cast<double>(nums.top()) + static_cast<double>(tmp) < INT_MIN)
 					tmp = nums.top() + tmp;
 					nums.pop();
 					nums.push(tmp);
 					break;
 				case 1:
+					if (static_cast<double>(nums.top()) - static_cast<double>(tmp) > INT_MAX || static_cast<double>(nums.top()) - static_cast<double>(tmp) < INT_MIN)
 					tmp = nums.top() - tmp;
 					nums.pop();
 					nums.push(tmp);
 					break;
 				case 2:
+					if (static_cast<double>(nums.top()) * static_cast<double>(tmp) > INT_MAX || static_cast<double>(nums.top()) * static_cast<double>(tmp) < INT_MIN)
+						throw std::runtime_error("overflow");
 					tmp = nums.top() * tmp;
 					nums.pop();
 					nums.push(tmp);
@@ -40,7 +44,7 @@ void	RPN::calc(std::istringstream &in) {
 					}
 					else
 						throw std::runtime_error("division by zero");
-			}
+	}
 		}
 		else
 			throw std::runtime_error("Error");

@@ -4,6 +4,7 @@
 #include <sstream>
 #include <list>
 #include <iostream>
+#include <climits>
 
 class RPN {
 	private:

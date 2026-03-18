@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
+#include <climits>
 
 int main(int argc, char ** argv)
 {
@@ -13,33 +14,46 @@ int main(int argc, char ** argv)
 	std::vector<unsigned int>	vec;
 	std::deque<unsigned int>	deq;
 	if (argc < 2)
+	{
+		std::cerr << "Usage: ./PmergeMe <input numbers>\n";
 		return 1;
+	}
 	for (int i = 1; i < argc; i++)
 	{
-		vec.push_back(strtod(argv[i], NULL));
-		deq.push_back(strtod(argv[i], NULL));
+		double	num = strtod(argv[i], NULL);
+		if (num > INT_MAX || num < 0)
+		{
+			std::cerr << "only positive integers are accepted as input\n";
+			return 1;
+		}
+		vec.push_back(static_cast<unsigned int>(num));
+		deq.push_back(static_cast<unsigned int>(num));
 	}
+
 	for (std::vector<unsigned int>::iterator it = vec.begin(); it != vec.end(); it ++) {
 		std::cout << *it << " ";
 	}
 	std::cout << std::endl;
-	// clock_t start = std::clock();
+
+
+	clock_t start = std::clock();
 	me.merge_insert_sort(vec, 1);
+	clock_t end = std::clock();
+	double elapsed_us = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
+	std::cout << "vec: " << elapsed_us << " us\n";
 	me.get_n_comparison();
+
+
 	me.reset_n_comparison();
+	start = std::clock();
 	me.merge_insert_sort(deq, 1);
-	// clock_t end = std::clock();
-
-	//double elapsed_us = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
-	//std::cout << "time " << elapsed_us << " us\n";
-
+	end = std::clock();
+	elapsed_us = (double)(end - start) * 1000.0 / CLOCKS_PER_SEC;
+	std::cout << "deq: " << elapsed_us << " us\n";
+	me.get_n_comparison();
 	
-	std::cout << "vec: \n";
+	
 	for (std::vector<unsigned int>::iterator it = vec.begin(); it != vec.end(); it ++) {
-		std::cout << *it << " ";
-	}
-	std::cout << "\ndeq: \n";
-	for (std::deque<unsigned int>::iterator it = deq.begin(); it != deq.end(); it ++) {
 		std::cout << *it << " ";
 	}
 	std::cout << std::endl;
