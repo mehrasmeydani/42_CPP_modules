@@ -102,6 +102,8 @@ void	BitcoinExchange::print_data(std::ifstream& input) const {
 	while (std::getline(input, buffer))
 	{
 		try {
+			if (buffer.length() < 14)
+				throw std::runtime_error("Invalid list format");
 			if (buffer.substr(10, 3) != " | ")
 				throw std::runtime_error("Invalid list format");
 			date = get_date(buffer);
@@ -110,14 +112,24 @@ void	BitcoinExchange::print_data(std::ifstream& input) const {
 			value = std::strtod(buffer.substr(13).c_str(), NULL);
 			if (errno != 0)
 				throw std::runtime_error(std::strerror(errno));
-			if (value > INT_MAX)
+			if (value > 1000)
 				throw std::runtime_error("Too large value");
 			std::map<int, double>::const_iterator it = this->btc.begin();
 			while (it != btc.end() && it->first < date)
 				it++;
 			if (it != btc.begin() && (it == btc.end() ||  it->first != date))
 				it--;
-			std::cout << it->first / 10000  << "-" << it->first % 10000 / 100 << "-" << it->first % 100 << " => " << value << " = " << value * it->second << std::endl;
+			int	year = it->first / 10000;
+			int month = it->first % 10000 / 100;
+			int day = it->first % 100;
+
+			std::cout << year  << "-";
+			if (month < 10) 
+				std::cout << "0";
+			std::cout << it->first % 10000 / 100 << "-";;
+			if (day < 10)
+				std::cout << "0";
+			std::cout << it->first % 100 << " => " << value << " = " << value * it->second << std::endl;
 		} catch (const std::exception &e) {
 			std::cerr << "Error: " << e.what() << std::endl;
 		}

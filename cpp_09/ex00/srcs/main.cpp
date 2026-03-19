@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
 		print_error("Use the following format:\n./btc <inputfile.csv>");
 		return (1);
 	}
-	std::ifstream	database("database.csv");
+	std::ifstream	database("data.csv");
 	if (!database.is_open())
 	{
 		print_error("Cannot open data base");
@@ -27,13 +27,7 @@ int main(int argc, char **argv) {
 		print_error(e.what());
 		return (1);
 	}
-	input_file = argv[1];
-	if (input_file.rfind(".csv", input_file.npos) != input_file.size() - 4 && input_file.size() != 4)
-	{
-		print_error("Input file not in .csv format");
-		return (0);
-	}
-	std::ifstream	input(input_file.c_str());
+	std::ifstream	input(argv[1]);
 	if (!input.is_open())
 	{
 		print_error("Cannot open input file");
