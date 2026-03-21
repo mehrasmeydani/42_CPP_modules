@@ -75,6 +75,8 @@ void	BitcoinExchange::set_map(std::ifstream& data_base) {
 	while (std::getline(data_base, buffer))
 	{
 		try {
+			if (buffer.length() < 11)
+				throw std::runtime_error("Invalid list format");
 			if (buffer[10] != ',')
 				throw std::runtime_error("Invalid list format");
 			date = get_date(buffer);
