@@ -17,12 +17,14 @@ void	RPN::calc(std::istringstream &in) {
 			switch (pos) {
 				case 0:
 					if (static_cast<double>(nums.top()) + static_cast<double>(tmp) > INT_MAX || static_cast<double>(nums.top()) + static_cast<double>(tmp) < INT_MIN)
+						throw std::runtime_error("overflow");
 					tmp = nums.top() + tmp;
 					nums.pop();
 					nums.push(tmp);
 					break;
 				case 1:
 					if (static_cast<double>(nums.top()) - static_cast<double>(tmp) > INT_MAX || static_cast<double>(nums.top()) - static_cast<double>(tmp) < INT_MIN)
+						throw std::runtime_error("overflow");
 					tmp = nums.top() - tmp;
 					nums.pop();
 					nums.push(tmp);
