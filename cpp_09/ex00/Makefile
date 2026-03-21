@@ -1,12 +1,12 @@
-																	# **************************************************************************** #
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mehras <mehras@student.42.fr>              +#+  +:+       +#+         #
+#    By: megardes <megardes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 14:44:18 by codespace         #+#    #+#              #
-#    Updated: 2026/01/26 23:16:24 by mehras           ###   ########.fr        #
+#    Updated: 2026/03/21 16:40:47 by megardes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ HEAD		= BitcoinExchange.hpp
 HEADS		= ${addprefix ${PRE_HEAD}, ${HEAD}}
 PRE_HEAD	= header/
 NAME		= btc
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -fsanitize=address,leak,undefined -g
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -g #-fsanitize=address,leak,undefined -g
 OBJ			= ${SRC:.cpp=.o}
 PRE_OBJ		= obj/
 OBJS		= ${addprefix ${PRE_OBJ}, ${OBJ}}

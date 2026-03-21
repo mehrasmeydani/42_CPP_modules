@@ -119,19 +119,21 @@ void	BitcoinExchange::print_data(std::ifstream& input) const {
 			std::map<int, double>::const_iterator it = this->btc.begin();
 			while (it != btc.end() && it->first < date)
 				it++;
+			if (it == btc.begin() && it->first != date)
+				throw std::runtime_error("Invalid Date");
 			if (it != btc.begin() && (it == btc.end() ||  it->first != date))
 				it--;
-			int	year = it->first / 10000;
-			int month = it->first % 10000 / 100;
-			int day = it->first % 100;
+			int	year = date / 10000;
+			int month = date % 10000 / 100;
+			int day = date % 100;
 
 			std::cout << year  << "-";
 			if (month < 10) 
 				std::cout << "0";
-			std::cout << it->first % 10000 / 100 << "-";;
+			std::cout << month << "-";;
 			if (day < 10)
 				std::cout << "0";
-			std::cout << it->first % 100 << " => " << value << " = " << value * it->second << std::endl;
+			std::cout << day << " => " << value << " = " << value * it->second << std::endl;
 		} catch (const std::exception &e) {
 			std::cerr << "Error: " << e.what() << std::endl;
 		}

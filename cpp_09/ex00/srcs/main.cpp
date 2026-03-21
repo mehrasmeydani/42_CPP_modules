@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
 	try {
 		btc.print_data(input);
 	} catch (const std::exception &e) {
-		std::cerr << "Parsing database failed: \n";
+		std::cerr << "Parsing input failed: \n";
 		print_error(e.what());
 		return (1);
 	}
